@@ -25,6 +25,22 @@ export const metadata: Metadata = {
   },
   description:
     'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
+  keywords: [
+    'Back-end as a Service',
+    'BaaS',
+    'PocketBase alternative',
+    'Supabase alternative',
+    'SQLite',
+    'Rust',
+    'authentication',
+    'file storage',
+    'realtime',
+    'webhooks',
+    'cron jobs',
+    'MCP server',
+  ],
+  authors: [{ name: 'hieudoan', url: 'https://github.com/hieudoanm/blazers' }],
+  category: 'software',
   openGraph: {
     siteName: 'Blazers',
     type: 'website',
@@ -37,6 +53,28 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: ['/og.png'] },
 };
 
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'Blazers',
+      url: 'https://hieudoanm.github.io/blazers/',
+      description: 'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Blazers',
+      applicationCategory: 'DeveloperApplication',
+      description: 'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
+      url: 'https://hieudoanm.github.io/blazers/',
+      codeRepository: 'https://github.com/hieudoanm/blazers',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ]
+};
+
 interface RootLayoutProps {
   children: ReactNode;
 }
@@ -47,6 +85,10 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => (
     data-theme="blazers"
     className={`scroll-smooth antialiased motion-reduce:scroll-auto ${inter.className}`}>
     <body className="bg-base-100 text-base-content m-0 leading-relaxed">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
       <Navbar
         name="blazers"
         logoSrc={LOGO}
