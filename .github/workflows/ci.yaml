@@ -260,5 +260,5 @@ jobs:
         with:
           tag_name: latest
           name: Blazers (latest)
-          body_path: README.md
+          body_path: RELEASE.md
           files: dist/*
