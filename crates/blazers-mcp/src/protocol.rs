@@ -48,6 +48,34 @@ impl Request {
     }
 }
 
+/// MCP tool annotations — the four hints hosts use to warn users before a
+/// call. Every tool declares all four explicitly so directories that require
+/// them (e.g. OpenAI's) accept the listing.
+#[derive(Debug, Clone, Copy, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Annotations {
+    pub read_only_hint: bool,
+    pub destructive_hint: bool,
+    pub idempotent_hint: bool,
+    pub open_world_hint: bool,
+}
+
+impl Annotations {
+    pub const fn new(
+        read_only_hint: bool,
+        destructive_hint: bool,
+        idempotent_hint: bool,
+        open_world_hint: bool,
+    ) -> Self {
+        Annotations {
+            read_only_hint,
+            destructive_hint,
+            idempotent_hint,
+            open_world_hint,
+        }
+    }
+}
+
 /// One tool exposed over MCP.
 #[derive(Debug, Clone, Serialize)]
 pub struct Tool {
@@ -55,6 +83,7 @@ pub struct Tool {
     pub description: String,
     #[serde(rename = "inputSchema")]
     pub input_schema: Schema,
+    pub annotations: Annotations,
 }
 
 /// A text block inside a tool result.
