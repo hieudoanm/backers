@@ -1,10 +1,11 @@
 use super::*;
-use crate::protocol::{PropertySchema, Schema, Tool};
+use crate::protocol::{Annotations, PropertySchema, Schema, Tool};
 
 fn kv_tool_entry(
     name: &str,
     description: &str,
     input_schema: Schema,
+    annotations: Annotations,
     handler: Box<dyn Fn(&str) -> crate::protocol::ToolResult>,
 ) -> Registered {
     Registered {
@@ -12,6 +13,7 @@ fn kv_tool_entry(
             name: name.to_string(),
             description: description.to_string(),
             input_schema,
+            annotations,
         },
         handler,
     }
@@ -26,6 +28,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
             "blazers_kv_ping",
             "Ping the remote blazers kv server",
             Schema::empty(),
+            Annotations::new(true, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_ping(&addr, args))
@@ -42,6 +45,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 ],
                 &["key", "value"],
             ),
+            Annotations::new(false, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_set(&addr, args))
@@ -54,6 +58,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 vec![("key", PropertySchema::string("Key to fetch"))],
                 &["key"],
             ),
+            Annotations::new(true, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_get(&addr, args))
@@ -66,6 +71,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 vec![("keys", PropertySchema::string_list("Keys to delete"))],
                 &["keys"],
             ),
+            Annotations::new(false, true, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_del(&addr, args))
@@ -78,6 +84,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 vec![("key", PropertySchema::string("Key to check"))],
                 &["key"],
             ),
+            Annotations::new(true, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_exists(&addr, args))
@@ -93,6 +100,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 )],
                 &[],
             ),
+            Annotations::new(true, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_keys(&addr, args))
@@ -102,6 +110,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
             "blazers_kv_len",
             "Count keys on the remote kv server",
             Schema::empty(),
+            Annotations::new(true, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_len(&addr, args))
@@ -114,6 +123,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 vec![("key", PropertySchema::string("Key to inspect"))],
                 &["key"],
             ),
+            Annotations::new(true, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_ttl(&addr, args))
@@ -129,6 +139,7 @@ pub fn register_kv(addr: &str) -> Vec<Registered> {
                 ],
                 &["key", "seconds"],
             ),
+            Annotations::new(false, false, true, true),
             {
                 let addr = addr.clone();
                 Box::new(move |args| handle_kv_expire(&addr, args))

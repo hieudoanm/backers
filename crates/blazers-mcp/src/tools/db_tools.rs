@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use super::Registered;
 use crate::handlers::*;
-use crate::protocol::{PropertySchema, Schema, Tool};
+use crate::protocol::{Annotations, PropertySchema, Schema, Tool};
 
 pub(super) fn collection_tools(db: &DbHandle) -> Vec<Registered> {
     vec![
@@ -19,6 +19,7 @@ pub(super) fn collection_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["name"],
             ),
+            Annotations::new(false, false, false, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_collections_create(&db, args))
@@ -31,6 +32,7 @@ pub(super) fn collection_tools(db: &DbHandle) -> Vec<Registered> {
                 vec![("name", PropertySchema::string("Collection name"))],
                 &["name"],
             ),
+            Annotations::new(false, true, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_collections_delete(&db, args))
@@ -40,6 +42,7 @@ pub(super) fn collection_tools(db: &DbHandle) -> Vec<Registered> {
             "blazers_collections_list",
             "List all collections in the blazers database",
             Schema::empty(),
+            Annotations::new(true, false, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_collections_list(&db, args))
@@ -55,6 +58,7 @@ pub(super) fn collection_tools(db: &DbHandle) -> Vec<Registered> {
                 )],
                 &["format"],
             ),
+            Annotations::new(true, false, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_export(&db, args))
@@ -64,6 +68,7 @@ pub(super) fn collection_tools(db: &DbHandle) -> Vec<Registered> {
             "blazers_health",
             "Check if the blazers MCP server is operational",
             Schema::empty(),
+            Annotations::new(true, false, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_health(&db, args))
@@ -90,6 +95,7 @@ pub(super) fn record_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["format", "data"],
             ),
+            Annotations::new(false, true, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_import(&db, args))
@@ -112,6 +118,7 @@ pub(super) fn record_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["collection", "data"],
             ),
+            Annotations::new(false, false, false, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_records_create(&db, args))
@@ -127,6 +134,7 @@ pub(super) fn record_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["collection", "id"],
             ),
+            Annotations::new(false, true, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_records_delete(&db, args))
@@ -142,6 +150,7 @@ pub(super) fn record_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["collection", "id"],
             ),
+            Annotations::new(true, false, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_records_get(&db, args))
@@ -168,6 +177,7 @@ pub(super) fn record_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["collection"],
             ),
+            Annotations::new(true, false, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_records_list(&db, args))
@@ -187,6 +197,7 @@ pub(super) fn record_tools(db: &DbHandle) -> Vec<Registered> {
                 ],
                 &["collection", "id", "data"],
             ),
+            Annotations::new(false, true, true, false),
             {
                 let db = Arc::clone(db);
                 Box::new(move |args| handle_records_update(&db, args))
@@ -200,6 +211,7 @@ pub(super) fn tool(
     name: &str,
     description: &str,
     input_schema: Schema,
+    annotations: Annotations,
     handler: Box<dyn Fn(&str) -> crate::protocol::ToolResult>,
 ) -> Registered {
     Registered {
@@ -207,6 +219,7 @@ pub(super) fn tool(
             name: name.to_string(),
             description: description.to_string(),
             input_schema,
+            annotations,
         },
         handler,
     }
