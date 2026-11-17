@@ -23,23 +23,40 @@ Usage:
 
 /// Reports whether the arguments select the stdio MCP server, with the
 /// optional `--kv HOST:PORT` remote-store flag.
-fn mcp_args(args: &[String]) -> Option<Option<String>> {
+/// Parsed `blazers mcp serve` flags.
+struct McpFlags {
+    kv: Option<String>,
+    http: Option<String>,
+    token: Option<String>,
+}
+
+/// Reports whether the arguments select the MCP server and parses its flags.
+fn mcp_args(args: &[String]) -> Option<McpFlags> {
     if args.first().map(String::as_str) != Some("mcp")
         || args.get(1).map(String::as_str) != Some("serve")
     {
         return None;
     }
-    let mut kv = None;
+    let mut flags = McpFlags {
+        kv: None,
+        http: None,
+        token: None,
+    };
     let mut i = 2;
     while i < args.len() {
-        if args[i] == "--kv" {
-            kv = Some(args.get(i + 1)?.clone());
-            i += 2;
-        } else {
-            return None;
+        let take = |i: &mut usize| -> Option<String> {
+            let value = args.get(*i + 1)?.clone();
+            *i += 2;
+            Some(value)
+        };
+        match args[i].as_str() {
+            "--kv" => flags.kv = Some(take(&mut i)?),
+            "--http" => flags.http = Some(take(&mut i)?),
+            "--token" => flags.token = Some(take(&mut i)?),
+            _ => return None,
         }
     }
-    Some(kv)
+    Some(flags)
 }
 
 /// Parses `blazers kv [--port N] [--bind ADDR]` into (bind, port).
@@ -82,14 +99,21 @@ async fn main() {
         );
         return;
     }
-    if let Some(kv_addr) = mcp_args(&args) {
+    if let Some(flags) = mcp_args(&args) {
         // The MCP server is synchronous and reads stdin to EOF, so it runs on
         // this thread. It opens the same SQLite database as the HTTP server,
         // or proxies a remote `blazers kv` listener when --kv is given.
         let mut stderr = std::io::stderr();
-        let result = match kv_addr {
-            Some(addr) => blazers_mcp::run_remote(&addr, &mut stderr),
-            None => blazers_mcp::run(&mut stderr),
+        let result = match flags.http {
+            Some(addr) => blazers_mcp::run_http(
+                &addr,
+                flags.token.or_else(|| std::env::var("MCP_AUTH_TOKEN").ok()),
+                flags.kv,
+            ),
+            None => match flags.kv {
+                Some(addr) => blazers_mcp::run_remote(&addr, &mut stderr),
+                None => blazers_mcp::run(&mut stderr),
+            },
         };
         if let Err(err) = result {
             let _ = writeln!(stderr, "blazers mcp serve: {err}");

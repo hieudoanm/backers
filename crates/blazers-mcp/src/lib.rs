@@ -6,6 +6,7 @@
 //! REST API see one set of data.
 
 pub mod handlers;
+pub mod http;
 pub mod kv;
 pub mod protocol;
 pub mod tools;
@@ -44,6 +45,36 @@ pub fn run_remote(addr: &str, diagnostics: &mut dyn Write) -> std::io::Result<()
     let mut server = Server::remote(&mut stdout, Diagnostics::Stream(diagnostics));
     server.register_kv(addr);
     server.serve(std::io::stdin())
+}
+
+/// Runs the MCP server over streamable HTTP on `addr` until the process
+/// exits. `kv_addr` selects the same remote-KV proxy mode as [`run_remote`].
+/// When `token` is set, requests must carry `Authorization: Bearer <token>`.
+pub fn run_http(addr: &str, token: Option<String>, kv_addr: Option<String>) -> std::io::Result<()> {
+    let db = if kv_addr.is_none() {
+        Some(handlers::open_db()?)
+    } else {
+        None
+    };
+    http::serve(addr, token, move |body: &str| {
+        let mut out: Vec<u8> = Vec::new();
+        let mut diag = std::io::sink();
+        let response = match (&db, &kv_addr) {
+            (Some(db), None) => {
+                let mut server =
+                    Server::with_diagnostics(&mut out, Diagnostics::Stream(&mut diag), db.clone());
+                server.register_tools();
+                server.response_for(body.as_bytes())
+            }
+            (None, Some(kv)) => {
+                let mut server = Server::remote(&mut out, Diagnostics::Stream(&mut diag));
+                server.register_kv(kv);
+                server.response_for(body.as_bytes())
+            }
+            _ => None,
+        };
+        response.and_then(|r| serde_json::to_string(&r).ok())
+    })
 }
 
 /// Diagnostics receives notification notices and write failures. Owning the
