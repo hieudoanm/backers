@@ -15,10 +15,12 @@ use blazers_core::db;
 use blazers_core::models::{AppError, ExportData};
 
 pub mod data;
+pub mod dbml;
 pub mod io;
 pub mod kv;
 
 pub use data::*;
+pub use dbml::*;
 pub use io::*;
 pub use kv::*;
 

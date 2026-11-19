@@ -204,6 +204,13 @@ pub fn app(state: Arc<AppState>) -> Router {
         .route("/api/cronjobs/{id}/logs", get(handlers::list_cron_job_logs))
         .route("/api/backup", get(handlers::get_backup))
         .route("/api/backup/run", post(crate::backups::handle_run_backup))
+        .route("/api/dbml/convert", post(crate::dbml::convert))
+        .route("/api/dbml/convert/sql", post(crate::dbml::convert_sql))
+        .route(
+            "/api/dbml/convert/mermaid",
+            post(crate::dbml::convert_mermaid),
+        )
+        .route("/api/dbml/parse", post(crate::dbml::parse_dbml))
         .route(
             "/api/settings",
             get(handlers::list_settings).put(handlers::update_settings),

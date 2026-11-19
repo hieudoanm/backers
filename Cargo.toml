@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "crates/blazers-core",
     "crates/blazers-kv",
+    "crates/blazers-dbml",
     "crates/blazers-server",
     "crates/blazers-mcp",
     "crates/blazers",

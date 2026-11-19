@@ -18,10 +18,12 @@ pub struct Registered {
 pub fn register(db: &DbHandle) -> Vec<Registered> {
     let mut tools = db_tools::collection_tools(db);
     tools.extend(db_tools::record_tools(db));
+    tools.extend(dbml::dbml_tools());
     tools
 }
 
 mod db_tools;
+mod dbml;
 mod kv;
 
 pub use kv::register_kv;

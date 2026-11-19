@@ -9,6 +9,7 @@ repository.workspace = true
 
 [dependencies]
 blazers-core = { path = "../blazers-core" }
+blazers-dbml = { path = "../blazers-dbml" }
 serde.workspace = true
 serde_json.workspace = true
 rusqlite.workspace = true

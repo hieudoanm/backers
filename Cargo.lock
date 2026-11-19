@@ -358,6 +358,7 @@ name = "blazers"
 version = "0.0.1"
 dependencies = [
  "blazers-core",
+ "blazers-dbml",
  "blazers-kv",
  "blazers-mcp",
  "blazers-server",
@@ -383,6 +384,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "blazers-dbml"
+version = "0.0.1"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "blazers-kv"
 version = "0.0.1"
 dependencies = [
@@ -400,6 +409,7 @@ name = "blazers-mcp"
 version = "0.0.1"
 dependencies = [
  "blazers-core",
+ "blazers-dbml",
  "rusqlite",
  "serde",
  "serde_json",
@@ -415,6 +425,7 @@ dependencies = [
  "axum",
  "bcrypt",
  "blazers-core",
+ "blazers-dbml",
  "blazers-kv",
  "chrono",
  "criterion",
