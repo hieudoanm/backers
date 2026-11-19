@@ -13,17 +13,18 @@ Inspired by PocketBase and Supabase; see the feature comparison in
 
 ## Repository layout
 
-| Path                        | What it is                                                                                                                                                      |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `crates/blazers-core`       | Storage layer: `db/` (schema, migrations, all SQL, split by domain) + `models/` (wire types, `AppError`, split by domain). See `crates/blazers-core/AGENTS.md`. |
-| `crates/blazers-kv`          | Key-value store: shared `CacheStore` (typed ops) + `kvproto` (Redis-style TCP for `blazers kv`). See `crates/blazers-kv/AGENTS.md`. |
-| `crates/blazers-server`     | Everything HTTP: feature modules + `app.rs` (router, embedded dashboard via `rust-embed`, `serve_http`). See `crates/blazers-server/AGENTS.md`.                 |
-| `crates/blazers-mcp`        | MCP stdio server (newline-delimited JSON-RPC 2.0) exposing the DB as tools. See `crates/blazers-mcp/AGENTS.md`.                                                 |
-| `crates/blazers`            | Thin binary: `blazers` / `blazers serve` → HTTP, `blazers mcp serve` → MCP.                                                                                     |
-| `packages/landing`          | Next.js + Tailwind landing page **and** docs site (`/docs/*`) → GitHub Pages. See `packages/landing/AGENTS.md`.                                                 |
+| Path                        | What it is                                                                                                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `crates/blazers-core`       | Storage layer: `db/` (schema, migrations, all SQL, split by domain) + `models/` (wire types, `AppError`, split by domain). See `crates/blazers-core/AGENTS.md`.     |
+| `crates/blazers-kv`         | Key-value store: shared `CacheStore` (typed ops) + `kvproto` (Redis-style TCP for `blazers kv`). See `crates/blazers-kv/AGENTS.md`.                                 |
+| `crates/blazers-dbml`       | DBML parser + SQL/Mermaid/SVG generators — powers `blazers db`, `/api/dbml/*`, `blazers_dbml_*` MCP tools. See `crates/blazers-dbml/AGENTS.md`.                     |
+| `crates/blazers-server`     | Everything HTTP: feature modules + `app.rs` (router, embedded dashboard via `rust-embed`, `serve_http`). See `crates/blazers-server/AGENTS.md`.                     |
+| `crates/blazers-mcp`        | MCP stdio server (newline-delimited JSON-RPC 2.0) exposing the DB as tools. See `crates/blazers-mcp/AGENTS.md`.                                                     |
+| `crates/blazers`            | Thin binary: `blazers` / `blazers serve` → HTTP, `blazers mcp serve` → MCP.                                                                                         |
+| `packages/landing`          | Next.js + Tailwind landing page **and** docs site (`/docs/*`) → GitHub Pages. See `packages/landing/AGENTS.md`.                                                     |
 | `packages/sdk`              | `@blazers/sdk` — dependency-free TypeScript client SDK: auth, records, files, realtime, batch. `npm run build` → `dist/`, `npm test`. See `packages/sdk/AGENTS.md`. |
-| `packages/app`              | `@blazers/app` — live demo SPA (Next.js + Tailwind + DaisyUI) exercising the SDK via `workspace:*`. `npm run dev` → :3001. See `packages/app/AGENTS.md`.          |
-| `.github/workflows/ci.yaml` | Pages deploy + release binary jobs.                                                                                                                             |
+| `packages/app`              | `@blazers/app` — live demo SPA (Next.js + Tailwind + DaisyUI) exercising the SDK via `workspace:*`. `npm run dev` → :3001. See `packages/app/AGENTS.md`.            |
+| `.github/workflows/ci.yaml` | Pages deploy + release binary jobs.                                                                                                                                 |
 
 ## Commands
 

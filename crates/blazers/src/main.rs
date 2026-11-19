@@ -1,7 +1,10 @@
 //! Blazers — a single-binary Back-end as a Service.
 //!
 //! `blazers` starts the HTTP server; `blazers mcp serve` starts the MCP
-//! server on stdio. Both share the same SQLite database.
+//! server on stdio; `blazers db …` converts DBML files. The servers share the
+//! same SQLite database.
+
+mod db;
 
 use std::io::Write;
 
@@ -15,6 +18,9 @@ Usage:
   blazers serve        Start the HTTP server
   blazers kv           Start the KV (Redis-style) TCP server
   blazers kv --port N  KV server on port N (default 6379)
+  blazers db sql|mermaid|svg|all|parse [file.dbml] [-o out]
+                       Convert DBML to SQL, Mermaid, SVG or a JSON summary
+                       ('-' reads the schema from stdin)
   blazers mcp serve    Start the MCP server on stdio
   blazers mcp serve --kv HOST:PORT
                        MCP server proxying a remote blazers kv server
@@ -118,6 +124,21 @@ async fn main() {
         if let Err(err) = result {
             let _ = writeln!(stderr, "blazers mcp serve: {err}");
             std::process::exit(1);
+        }
+        return;
+    }
+    if let Some(result) = db::db_args(&args) {
+        match result {
+            Ok(cmd) => {
+                if let Err(err) = db::run(&cmd) {
+                    eprintln!("blazers db {}: {err}", cmd.command);
+                    std::process::exit(1);
+                }
+            }
+            Err(err) => {
+                eprintln!("blazers db: {err}");
+                std::process::exit(2);
+            }
         }
         return;
     }

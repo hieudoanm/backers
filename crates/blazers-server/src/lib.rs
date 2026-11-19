@@ -13,6 +13,7 @@ pub mod auth;
 pub mod backups;
 pub mod content_type;
 pub mod cronjobs;
+pub mod dbml;
 pub mod handlers;
 pub mod image;
 pub mod import_export;
