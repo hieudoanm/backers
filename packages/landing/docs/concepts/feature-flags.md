@@ -2,8 +2,9 @@
 
 Feature flags let you ship code behind switches you control at runtime — turn
 features on per user, per plan, per percentage rollout, or kill them instantly
-without a redeploy. Flags live in the `_flags` table and are managed through
-`/api/flags` (admin) and resolved through `POST /api/flags/evaluate`.
+without a redeploy. Flags live in the `_flags` table and are managed through the
+admin dashboard (**Feature Flags** section) or `/api/flags` (admin), and
+resolved through `POST /api/flags/evaluate`.
 
 ## Anatomy of a flag
 
@@ -96,7 +97,9 @@ A disabled flag, a failing rule, or a missing attribute all produce
 
 ## Managing flags
 
-All management endpoints require an admin token (`admin` role on `*`).
+Flags can be managed in the admin dashboard (sign in → **Feature Flags** in the
+sidebar) or through the API. All management endpoints require an admin token
+(`admin` role on `*`).
 
 | Endpoint                   | Purpose                                                       |
 | -------------------------- | ------------------------------------------------------------- |
@@ -109,6 +112,11 @@ All management endpoints require an admin token (`admin` role on `*`).
 Every mutation broadcasts a `_flags` record-change event on the WebSocket hub
 (`collection: "_flags"`), so subscribed clients can invalidate cached flag state
 immediately.
+
+Flags are also reachable outside HTTP: the `@blazers/sdk` client exposes
+`bz.flags` (`list`/`get`/`upsert`/`update`/`remove`/`evaluate`), and the MCP
+server exposes `blazers_flags_*` tools that share the same `_flags` table — a
+flag written over MCP is live for `evaluate` immediately.
 
 ## Patterns
 

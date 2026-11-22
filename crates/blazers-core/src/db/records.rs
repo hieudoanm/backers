@@ -11,6 +11,14 @@ pub fn insert_record(
     id: &str,
     data: &Value,
 ) -> Result<Record> {
+    // Schema validation lives here so every write path — REST, batch, MCP,
+    // import — enforces the collection schema, not just the HTTP handlers.
+    let col = get_collection(conn, collection)?;
+    if let Some(col) = &col
+        && col.schema != "{}"
+    {
+        validate_data(data, &col.schema)?;
+    }
     let now = Utc::now().to_rfc3339();
     let raw = data.to_string();
     let sql = format!(
@@ -24,7 +32,7 @@ pub fn insert_record(
                 AppError::Internal(format!("insert record: {e}"))
             }
         })?;
-    if let Ok(Some(col)) = get_collection(conn, collection)
+    if let Some(col) = &col
         && col.schema != "{}"
     {
         let _ = sync_schema_columns(conn, collection, id, &col.schema);
@@ -149,13 +157,19 @@ pub fn update_record(
     id: &str,
     data: &Value,
 ) -> Result<Record> {
+    let col = get_collection(conn, collection)?;
+    if let Some(col) = &col
+        && col.schema != "{}"
+    {
+        validate_data(data, &col.schema)?;
+    }
     let now = Utc::now().to_rfc3339();
     let raw = data.to_string();
     let sql = format!("UPDATE \"_data_{collection}\" SET data = ?1, updated_at = ?2 WHERE id = ?3");
     conn.execute(&sql, params![raw, now, id])
         .map_err(|e| AppError::Internal(e.to_string()))?;
 
-    if let Ok(Some(col)) = get_collection(conn, collection)
+    if let Some(col) = &col
         && col.schema != "{}"
     {
         let _ = sync_schema_columns(conn, collection, id, &col.schema);
