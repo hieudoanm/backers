@@ -20,7 +20,7 @@ const NAV_LINKS = [
 export const metadata: Metadata = {
   metadataBase: new URL('https://hieudoanm.github.io/backers/'),
   title: {
-    default: 'Backers — blazing fast Back-end as a Service',
+    default: 'Backers — Back-end as a Service',
     template: '%s — Backers',
   },
   description:
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'Backers',
     type: 'website',
-    title: 'Backers — blazing fast Back-end as a Service',
+    title: 'Backers — Back-end as a Service',
     description:
       'Auth, database, files, realtime, webhooks, cron, secrets and an MCP server — one Rust binary, one SQLite file.',
     url: 'https://hieudoanm.github.io/backers/',
@@ -99,7 +99,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => (
       {children}
       <Footer
         name="backers"
-        tagline="Blazing fast Back-end as a Service · Rust · SQLite · MIT"
+        tagline="Back-end as a Service · Rust · SQLite · MIT"
         githubUrl={GITHUB}
       />
       

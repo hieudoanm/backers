@@ -11,7 +11,7 @@ use std::io::Write;
 /// USAGE lists the accepted command lines. The default is the HTTP server, so
 /// `backers` and `backers serve` both start it.
 const USAGE: &str = "\
-Backers - blazing fast Back-end as a Service
+Backers - Back-end as a Service
 
 Usage:
   backers              Start the HTTP server
