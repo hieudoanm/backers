@@ -1,0 +1,27 @@
+{
+  "name": "@blazers/sdk",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Rust client SDK for the Blazers BaaS — auth, records, files, realtime, flags, functions. Compiles to wasm32 for Node/browser usage.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    }
+  },
+  "types": "./index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "pkg"
+  ],
+  "scripts": {
+    "build": "wasm-pack build --target bundler --out-dir pkg --out-name blazers_sdk .",
+    "build:node": "wasm-pack build --target nodejs --out-dir pkg-node --out-name blazers_sdk .",
+    "clean": "rm -rf pkg pkg-node"
+  }
+}

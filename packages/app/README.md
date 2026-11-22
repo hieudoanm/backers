@@ -1,8 +1,8 @@
 # Blazers Demo App
 
 Live demo of the [Blazers](../../README.md) BaaS — Next.js + Tailwind CSS +
-DaisyUI, powered by the [`@blazers/sdk`](../sdk) TypeScript SDK (`workspace:*`
-dependency).
+DaisyUI, powered by [`@blazers/sdk`](../../crates/blazers-sdk) — the Rust SDK
+compiled to WASM (`workspace:*` dependency).
 
 ## Features
 
@@ -19,7 +19,7 @@ dependency).
 
 ```bash
 # 1. SDK must be built once
-cd packages/sdk && npm install && npm run build && cd ..
+pnpm --filter @blazers/sdk build   # wasm-pack → crates/blazers-sdk/pkg/
 
 # 2. Blazers server (any data dir)
 BLAZERS_DATA=/tmp/blazers-demo PORT=8090 JWT_SECRET=dev ./target/debug/blazers serve

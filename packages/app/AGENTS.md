@@ -8,7 +8,9 @@ conventions.
 
 `@blazers/app` — live demo SPA for the Blazers BaaS: Next.js 16 (App Router)
 
-- Tailwind CSS v4 + DaisyUI, powered by `@blazers/sdk` (`workspace:*`).
+- Tailwind CSS v4 + DaisyUI, powered by `@blazers/sdk` (`workspace:*`) — the
+  Rust SDK in `crates/blazers-sdk` compiled to WASM; run
+  `pnpm --filter @blazers/sdk build` (wasm-pack) before `pnpm dev`/`build`.
   Client-side only — all state lives in the browser (token in `localStorage`).
 
 ## Layout
@@ -57,8 +59,15 @@ Requires a running server: `blazers serve` on `:8090` (override with
 
 ## This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+This version has breaking changes — APIs, conventions, and file structure may
+all differ from your training data. Read the relevant guide in
+`node_modules/next/dist/docs/` (resolved from this file's directory; in
+monorepos the `next` package may not be visible from the repo root) before
+writing any code. Heed deprecation notices.
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+This block is written and re-added by `next dev` — verify at
+`node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a
+diff only re-creates the uncommitted change; committing it with your work keeps
+the tree clean.
 
 <!-- END:nextjs-agent-rules -->

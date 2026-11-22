@@ -1,4 +1,5 @@
 packages:
   - 'packages/**'
+  - 'crates/blazers-sdk'
 
 minimumReleaseAge: 0
