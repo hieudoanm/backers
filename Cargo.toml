@@ -6,6 +6,7 @@ members = [
     "crates/blazers-dbml",
     "crates/blazers-server",
     "crates/blazers-mcp",
+    "crates/blazers-sdk",
     "crates/blazers",
 ]
 

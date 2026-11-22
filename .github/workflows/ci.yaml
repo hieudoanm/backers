@@ -38,8 +38,18 @@ jobs:
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
 
+      # `@blazers/sdk` is the Rust SDK compiled to WASM — its build needs the
+      # wasm32 target and wasm-pack before turbo builds it for the app.
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
       # `@blazers/app...` selects the app plus its workspace deps (@blazers/sdk),
-      # so the SDK is built before the app's typecheck/build consume dist/.
+      # so the SDK is built before the app's typecheck/build consume pkg/.
       - name: Build app + sdk
         run: pnpm exec turbo run build --filter=@blazers/app...
 
