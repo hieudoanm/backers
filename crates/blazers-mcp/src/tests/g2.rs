@@ -132,3 +132,54 @@ fn records_list_rejects_a_page_below_one() {
     );
     assert!(error_text(&reply).contains("page must be 1 or greater"));
 }
+
+#[test]
+fn records_writes_enforce_the_collection_schema() {
+    let (_dir, db) = test_db();
+    let schema = json!({ "name": "typed", "schema": r#"{"title":"string","views?":"integer"}"# });
+    let _collection = single(
+        call_tool(26, "blazers_collections_create", schema.clone()),
+        db.clone(),
+    );
+
+    let bad_create = single(
+        call_tool(
+            27,
+            "blazers_records_create",
+            json!({ "collection": "typed", "data": { "views": "many" } }),
+        ),
+        db.clone(),
+    );
+    assert!(error_text(&bad_create).contains("title"));
+
+    let good = single(
+        call_tool(
+            28,
+            "blazers_records_create",
+            json!({ "collection": "typed", "id": "t1", "data": { "title": "Hi" } }),
+        ),
+        db.clone(),
+    );
+    assert!(tool_text(&good).contains("Hi"));
+
+    let bad_update = single(
+        call_tool(
+            29,
+            "blazers_records_update",
+            json!({ "collection": "typed", "id": "t1", "data": { "title": 42 } }),
+        ),
+        db.clone(),
+    );
+    assert!(error_text(&bad_update).contains("string"));
+
+    // collections_create rejects malformed schemas up front.
+    let bad_schema = single(
+        call_tool(
+            30,
+            "blazers_collections_create",
+            json!({ "name": "bad", "schema": r#"{"x":"not-a-type"}"# }),
+        ),
+        db,
+    );
+    assert!(error_text(&bad_schema).contains("unknown type"));
+}

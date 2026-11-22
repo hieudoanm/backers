@@ -123,3 +123,36 @@ fn test_insert_record_duplicate() {
     let err = insert_record(&conn, "dup_rec", "r1", &json!({"x": 2})).unwrap_err();
     assert!(matches!(err, AppError::Conflict(_)));
 }
+
+#[test]
+fn test_insert_record_enforces_schema() {
+    let conn = Connection::open_in_memory().unwrap();
+    migrate_db(&conn).unwrap();
+    insert_collection(
+        &conn,
+        "typed",
+        r#"{"name":"string","age":"integer","nick?":"string"}"#,
+    )
+    .unwrap();
+    create_collection_table(
+        &conn,
+        "typed",
+        r#"{"name":"string","age":"integer","nick?":"string"}"#,
+    )
+    .unwrap();
+
+    // Missing required field and wrong type are both rejected at the db layer.
+    let err = insert_record(&conn, "typed", "bad1", &json!({"age": 30})).unwrap_err();
+    assert!(matches!(err, AppError::BadRequest(_)));
+    assert!(err.to_string().contains("name"));
+
+    let err = insert_record(&conn, "typed", "bad2", &json!({"name": "a", "age": "x"})).unwrap_err();
+    assert!(matches!(err, AppError::BadRequest(_)));
+
+    insert_record(&conn, "typed", "ok", &json!({"name": "a", "age": 30})).unwrap();
+
+    // update_record enforces the same schema.
+    let err = update_record(&conn, "typed", "ok", &json!({"age": 30})).unwrap_err();
+    assert!(matches!(err, AppError::BadRequest(_)));
+    update_record(&conn, "typed", "ok", &json!({"name": "b", "age": 31})).unwrap();
+}

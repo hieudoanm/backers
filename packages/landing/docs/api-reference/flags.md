@@ -3,8 +3,8 @@
 Concepts: [Feature flags](../concepts/feature-flags.md)
 
 Base: `/api/flags`. Management endpoints require `Authorization: Bearer <token>`
-with the `admin` role; evaluation is open (send a token to expose
-`user_id`/`email` to rules).
+with the `admin` role (or use the admin dashboard's Feature Flags section);
+evaluation is open (send a token to expose `user_id`/`email` to rules).
 
 ## Flag object
 

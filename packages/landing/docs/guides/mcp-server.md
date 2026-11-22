@@ -29,6 +29,15 @@ alongside a live server (SQLite WAL handles concurrent readers).
 | `blazers_records_delete`     | delete a record                                |
 | `blazers_export`             | dump collections/records/buckets/files as JSON |
 | `blazers_import`             | import an export payload                       |
+| `blazers_flags_list`         | list feature flags                             |
+| `blazers_flags_get`          | fetch one flag                                 |
+| `blazers_flags_upsert`       | create or replace a flag                       |
+| `blazers_flags_delete`       | delete a flag                                  |
+| `blazers_flags_evaluate`     | evaluate flags against a context object        |
+| `blazers_dbml_sql`           | DBML → PostgreSQL DDL                          |
+| `blazers_dbml_mermaid`       | DBML → Mermaid ER diagram                      |
+| `blazers_dbml_svg`           | DBML → SVG ER diagram                          |
+| `blazers_dbml_parse`         | DBML → JSON summary                            |
 
 Tool names are prefixed `blazers_` (rebranded from the original `backbone_*`).
 

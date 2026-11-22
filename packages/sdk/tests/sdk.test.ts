@@ -83,6 +83,65 @@ describe('CollectionClient query', () => {
   });
 });
 
+describe('FlagsClient', () => {
+  const json = (body: unknown) =>
+    new Response(JSON.stringify(body), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+  it('lists flags, joining names into the query', async () => {
+    const seen: string[] = [];
+    const bz = new Blazers({
+      url: 'http://x',
+      fetch: (async (url: unknown) => {
+        seen.push(String(url));
+        return json([{ name: 'a', enabled: true }]);
+      }) as typeof fetch,
+    });
+    const all = await bz.flags.list();
+    expect(all).toHaveLength(1);
+    expect(seen[0]).toBe('http://x/api/flags');
+    await bz.flags.list(['a', 'b']);
+    expect(seen[1]).toBe('http://x/api/flags?names=a%2Cb');
+  });
+
+  it('upserts and patches flags', async () => {
+    const calls: { url: unknown; init: RequestInit }[] = [];
+    const bz = new Blazers({
+      url: 'http://x',
+      fetch: (async (url: unknown, init?: RequestInit) => {
+        calls.push({ url, init: init ?? {} });
+        return json({ name: 'f', enabled: true });
+      }) as typeof fetch,
+    });
+    await bz.flags.upsert({ name: 'f', enabled: true });
+    await bz.flags.update('f', { enabled: false });
+    await bz.flags.remove('f');
+    expect(calls[0].init.method).toBe('POST');
+    expect(String(calls[0].url)).toBe('http://x/api/flags');
+    expect(calls[1].init.method).toBe('PATCH');
+    expect(String(calls[1].url)).toBe('http://x/api/flags/f');
+    expect(calls[2].init.method).toBe('DELETE');
+    expect(String(calls[2].url)).toBe('http://x/api/flags/f');
+  });
+
+  it('evaluates flags and unwraps the flags map', async () => {
+    let body: unknown;
+    const bz = new Blazers({
+      url: 'http://x',
+      fetch: (async (_url: unknown, init?: RequestInit) => {
+        body = JSON.parse(String(init?.body));
+        return json({ flags: { f: { enabled: true, payload: { v: 1 } } } });
+      }) as typeof fetch,
+    });
+    const res = await bz.flags.evaluate(['f'], { plan: 'pro' });
+    expect(res.f.enabled).toBe(true);
+    expect(res.f.payload).toEqual({ v: 1 });
+    expect(body).toEqual({ flags: ['f'], context: { plan: 'pro' } });
+  });
+});
+
 describe.skipIf(!process.env.BLAZERS_URL)('live server', () => {
   const base = process.env.BLAZERS_URL as string;
 

@@ -34,6 +34,9 @@ pub fn handle_collections_create(db: &DbHandle, arguments: &str) -> ToolResult {
     if name.is_empty() {
         return error_result("collection name must not be empty");
     }
+    if let Err(err) = db::validate_schema(&args.schema) {
+        return error_result(format!("invalid schema: {err}"));
+    }
 
     let outcome = with_db(db, |conn| {
         if db::get_collection(conn, &name)?.is_some() {

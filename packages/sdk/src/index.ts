@@ -1,5 +1,6 @@
 import { AuthClient } from './auth.js';
 import { FilesClient } from './files.js';
+import { FlagsClient } from './flags.js';
 import { FunctionsClient } from './functions.js';
 import { HttpClient, type ClientOptions } from './http.js';
 import { CollectionClient, CollectionsClient } from './records.js';
@@ -31,6 +32,14 @@ export type {
 export type { ClientOptions } from './http.js';
 export type { Credentials, MfaSetup, UpdateMeOptions } from './auth.js';
 export type { EdgeFunction } from './functions.js';
+export type {
+  Flag,
+  FlagEvaluation,
+  FlagOp,
+  FlagPatch,
+  FlagRule,
+  FlagUpsert,
+} from './flags.js';
 export type { FileTokenOptions } from './files.js';
 export type { PresenceOptions, SubscribeOptions } from './realtime.js';
 export {
@@ -38,6 +47,7 @@ export {
   CollectionClient,
   CollectionsClient,
   FilesClient,
+  FlagsClient,
   FunctionsClient,
   HttpClient,
   RealtimeClient,
@@ -65,6 +75,7 @@ export class Blazers {
   readonly auth: AuthClient;
   readonly collections: CollectionsClient;
   readonly files: FilesClient;
+  readonly flags: FlagsClient;
   readonly functions: FunctionsClient;
   readonly realtime: RealtimeClient;
 
@@ -75,6 +86,7 @@ export class Blazers {
     this.auth = new AuthClient(this.http);
     this.collections = new CollectionsClient(this.http);
     this.files = new FilesClient(this.http);
+    this.flags = new FlagsClient(this.http);
     this.functions = new FunctionsClient(this.http);
     this.realtime = new RealtimeClient(this.http);
   }
