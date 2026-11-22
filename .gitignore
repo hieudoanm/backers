@@ -16,3 +16,4 @@ packages/landing/out/
 browsers/
 .backers-data/
 *.db
+.tracers-cache/
