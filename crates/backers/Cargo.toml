@@ -1,6 +1,6 @@
 [package]
 name = "backers"
-description = "Backers - blazing fast Back-end as a Service in a single binary"
+description = "Backers - Back-end as a Service in a single binary"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true

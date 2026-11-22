@@ -276,7 +276,7 @@ const Home: NextPage = () => (
     <main id="top">
       {/* hero */}
       <Hero
-        title="Your whole backend, in one blazing fast binary."
+        title="Your whole backend, in one binary."
         description="Backers is a Back-end as a Service written in Rust: auth, a schema-less database, file storage, realtime streams, webhooks, cron jobs, encrypted secrets, pub/sub and an admin dashboard — all persisted to a single SQLite file. No Docker, no accounts, no cloud."
         primary={{ label: 'Get started', href: '#quickstart' }}
         secondary={{ label: 'Source on GitHub', href: GITHUB, external: true }}

@@ -4,12 +4,12 @@
 
 Topics: `baaas`, `backend-as-a-service`, `rust`, `sqlite`, `axum`, `mcp`, `self-hosted`
 
-**Blazing fast Back-end as a Service** — a single Rust binary that gives you
+**Back-end as a Service** — a single Rust binary that gives you
 auth, a dynamic database, file storage, realtime, webhooks, cron jobs,
 encrypted secrets, pub/sub, an admin dashboard and an MCP server. No Docker,
 no external services: everything persists to one SQLite file.
 
-![backers — a blazing fast Back-end as a Service](assets/branding/png/og.png)
+![backers — a Back-end as a Service](assets/branding/png/og.png)
 
 **Live demo:** <https://hieudoanm.github.io/backers/>
 
