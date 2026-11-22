@@ -65,7 +65,7 @@ to stay well under it.
 ## CORS
 
 `CorsLayer::permissive()` — any origin may call the API from a browser. Do not
-expose a Blazers instance holding sensitive data to untrusted origins without a
+expose a Backers instance holding sensitive data to untrusted origins without a
 reverse-proxy layer in front.
 
 ## Batch requests

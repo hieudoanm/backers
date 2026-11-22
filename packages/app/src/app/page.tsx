@@ -24,13 +24,13 @@ export default function Home() {
     <main className="mx-auto max-w-4xl px-6 py-16">
       <div className="mockup-code mb-8">
         <pre data-prefix="$">
-          <code>blazers serve --port 8090</code>
+          <code>backers serve --port 8090</code>
         </pre>
       </div>
 
-      <h1 className="text-4xl font-bold">Blazers demo</h1>
+      <h1 className="text-4xl font-bold">Backers demo</h1>
       <p className="text-base-content/70 mt-3 max-w-2xl">
-        A live playground for the Blazers BaaS — a single-binary backend with
+        A live playground for the Backers BaaS — a single-binary backend with
         auth, a schemaless database, file storage and realtime, inspired by
         PocketBase and Supabase.
       </p>
@@ -62,7 +62,7 @@ export default function Home() {
       </div>
 
       <p className="text-base-content/50 mt-10 text-sm">
-        Server URL: <code>NEXT_PUBLIC_BLAZERS_URL</code> (default{' '}
+        Server URL: <code>NEXT_PUBLIC_BACKERS_URL</code> (default{' '}
         <code>http://localhost:8090</code>)
       </p>
     </main>

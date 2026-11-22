@@ -15,8 +15,8 @@ Liveness probe. **No auth.**
 Download a consistent copy of the SQLite database.
 
 - Requires `admin` role on `*` (global admin).
-- Response: `application/octet-stream` SQLite file (`blazers-backup-<uuid>.db`),
-  suitable for `sqlite3` inspection or restoring into `BLAZERS_DATA/data.db`
+- Response: `application/octet-stream` SQLite file (`backers-backup-<uuid>.db`),
+  suitable for `sqlite3` inspection or restoring into `BACKERS_DATA/data.db`
   while the server is stopped.
 
 ```sh
@@ -37,7 +37,7 @@ JSON document with **all** collections, records, buckets, and file metadata:
 ```
 
 Requires auth. Does **not** include file bytes — pair with a filesystem backup
-of `BLAZERS_DATA/files/` for a full export.
+of `BACKERS_DATA/files/` for a full export.
 
 ## `POST /api/import` — portability import
 
@@ -64,6 +64,6 @@ Swagger UI pointed at `/api/openapi.json`.
 ## `GET /` and static assets
 
 Any unmatched path falls through to the embedded admin dashboard
-(`crates/blazers-server/public/`): `index.html`, `styles.css`, and the
+(`crates/backers-server/public/`): `index.html`, `styles.css`, and the
 HTMX/Mustache assets it references. See
 [Admin dashboard](../guides/admin-dashboard.md).

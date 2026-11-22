@@ -1,8 +1,8 @@
 # Architecture
 
-Blazers is a single Rust binary. One process serves the REST API, the admin
+Backers is a single Rust binary. One process serves the REST API, the admin
 dashboard, WebSockets, and three server-sent-event streams; a second mode
-(`blazers mcp serve`) exposes the same data over the Model Context Protocol.
+(`backers mcp serve`) exposes the same data over the Model Context Protocol.
 
 ## System overview
 
@@ -17,7 +17,7 @@ dashboard, WebSockets, and three server-sent-event streams; a second mode
   <text x="95" y="72" text-anchor="middle" fill="#9ca3af" font-size="11">curl · SDK · browser</text>
 
   <rect x="230" y="20" width="260" height="240" rx="12" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
-  <text x="360" y="42" text-anchor="middle" fill="#a5b4fc" font-size="13" font-weight="700">blazers serve</text>
+  <text x="360" y="42" text-anchor="middle" fill="#a5b4fc" font-size="13" font-weight="700">backers serve</text>
 
   <rect x="250" y="58" width="100" height="34" rx="7" fill="#111827" stroke="#374151"/>
   <text x="300" y="79" text-anchor="middle" fill="#d1d5db" font-size="11">REST API</text>
@@ -55,15 +55,15 @@ dashboard, WebSockets, and three server-sent-event streams; a second mode
 
 ```text
 crates/
-  blazers-core/    # SQLite schema, migrations, models, wire types
-  blazers-server/  # HTTP API, realtime, admin dashboard, all features
-  blazers-mcp/     # MCP stdio server (blazers_* tools)
-  blazers/         # thin binary: `blazers serve` / `blazers kv` / `blazers mcp serve`
+  backers-core/    # SQLite schema, migrations, models, wire types
+  backers-server/  # HTTP API, realtime, admin dashboard, all features
+  backers-mcp/     # MCP stdio server (backers_* tools)
+  backers/         # thin binary: `backers serve` / `backers kv` / `backers mcp serve`
 ```
 
-`blazers-core` owns persistence and knows nothing about HTTP. `blazers-server`
+`backers-core` owns persistence and knows nothing about HTTP. `backers-server`
 owns every feature and embeds the dashboard assets (`public/`) into the binary
-via `rust-embed`. `blazers-mcp` talks to the same SQLite database directly, so
+via `rust-embed`. `backers-mcp` talks to the same SQLite database directly, so
 MCP tools and the HTTP API always agree.
 
 ## Request lifecycle
@@ -81,12 +81,12 @@ Every `/api/*` request passes through the same middleware stack:
 
 ## Persistence model
 
-Everything lives in one SQLite file inside `BLAZERS_DATA`:
+Everything lives in one SQLite file inside `BACKERS_DATA`:
 
 - `collections` + dynamically-created record tables — schemaless-ish records
   validated against the collection's JSON schema.
 - `buckets` + `files` — metadata in SQLite, bytes on the filesystem under
-  `BLAZERS_DATA/files/`.
+  `BACKERS_DATA/files/`.
 - `users`, `permissions` — auth and RBAC.
 - `webhooks`, `webhook_logs`, `secrets`, `cache`, `notifications`, `logs`,
   `cron_jobs`, `cron_job_logs`, `ws_connections`, `ws_messages`,
@@ -107,9 +107,9 @@ Three independent channels share the same in-process hub pattern:
 
 ## MCP mode
 
-`blazers mcp serve` starts a stdio JSON-RPC server exposing tools such as
-`blazers_list_collections`, `blazers_list_records`, `blazers_export`, and
-`blazers_import`. It reads the same `BLAZERS_DATA` database, so an agent can
-inspect and modify a running Blazers backend without HTTP credentials.
-`blazers mcp serve --kv HOST:PORT` instead proxies a remote `blazers kv`
-listener and exposes `blazers_kv_*` tools over the inline TCP protocol.
+`backers mcp serve` starts a stdio JSON-RPC server exposing tools such as
+`backers_list_collections`, `backers_list_records`, `backers_export`, and
+`backers_import`. It reads the same `BACKERS_DATA` database, so an agent can
+inspect and modify a running Backers backend without HTTP credentials.
+`backers mcp serve --kv HOST:PORT` instead proxies a remote `backers kv`
+listener and exposes `backers_kv_*` tools over the inline TCP protocol.

@@ -1,8 +1,8 @@
 {
-  "name": "@blazers/workspace",
+  "name": "@backers/workspace",
   "version": "0.0.1",
   "private": true,
-  "description": "Blazers — single-binary BaaS (Rust) plus Rust SDK (wasm), demo app and landing/docs site",
+  "description": "Backers — single-binary BaaS (Rust) plus Rust SDK (wasm), demo app and landing/docs site",
   "license": "MIT",
   "author": {
     "name": "Hieu Doan",

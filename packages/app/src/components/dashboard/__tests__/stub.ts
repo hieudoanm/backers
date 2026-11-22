@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 
-/** Raw (untyped) Blazers stub — tests configure the vi.fn()s and cast to
- * `Blazers` when handing it to the mocked `getBlazers()`. */
-export function makeBlazersStub() {
+/** Raw (untyped) Backers stub — tests configure the vi.fn()s and cast to
+ * `Backers` when handing it to the mocked `getBackers()`. */
+export function makeBackersStub() {
   const recordClient = {
     list: vi.fn(),
     get: vi.fn(),
@@ -58,4 +58,4 @@ export function makeBlazersStub() {
   return { raw, recordClient };
 }
 
-export type BlazersStub = ReturnType<typeof makeBlazersStub>;
+export type BackersStub = ReturnType<typeof makeBackersStub>;

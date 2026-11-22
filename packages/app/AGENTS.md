@@ -1,4 +1,4 @@
-# AGENTS.md — @blazers/app
+# AGENTS.md — /app
 
 Guidance for AI agents working in `packages/app`. See the root
 [`AGENTS.md`](../../AGENTS.md) and `packages/landing/AGENTS.md` for shared
@@ -6,11 +6,11 @@ conventions.
 
 ## What this is
 
-`@blazers/app` — live demo SPA for the Blazers BaaS: Next.js 16 (App Router)
+`@backers/app` — live demo SPA for the Backers BaaS: Next.js 16 (App Router)
 
-- Tailwind CSS v4 + DaisyUI, powered by `@blazers/sdk` (`workspace:*`) — the
-  Rust SDK in `crates/blazers-sdk` compiled to WASM; run
-  `pnpm --filter @blazers/sdk build` (wasm-pack) before `pnpm dev`/`build`.
+- Tailwind CSS v4 + DaisyUI, powered by `@backers/sdk` (`workspace:*`) — the
+  Rust SDK in `crates/backers-sdk` compiled to WASM; run
+  `pnpm --filter @backers/sdk build` (wasm-pack) before `pnpm dev`/`build`.
   Client-side only — all state lives in the browser (token in `localStorage`).
 
 ## Layout
@@ -20,8 +20,8 @@ conventions.
 | `src/app/page.tsx`           | Landing: feature cards + quickstart                                       |
 | `src/app/login/page.tsx`     | Register/login, email OTP, MFA challenge                                  |
 | `src/app/dashboard/page.tsx` | Tab shell — records / collections / realtime / files                      |
-| `src/app/globals.css`        | Tailwind + DaisyUI `blazers` theme (same palette as landing)              |
-| `src/lib/blazers.ts`         | SDK singleton; token persisted under `blazers_demo_token`                 |
+| `src/app/globals.css`        | Tailwind + DaisyUI `backers` theme (same palette as landing)              |
+| `src/lib/backers.ts`         | SDK singleton; token persisted under `backers_demo_token`                 |
 | `src/lib/format.ts`          | Pure display helpers (`shortId`, `timeAgo`, `tryParseJson`) — unit-tested |
 | `src/components/dashboard/`  | `RecordsTab`, `CollectionsTab`, `RealtimeTab`, `FilesTab`                 |
 
@@ -36,16 +36,16 @@ npm run typecheck    # tsc --noEmit
 npm test             # vitest run (src/**/*.test.ts)
 ```
 
-Requires a running server: `blazers serve` on `:8090` (override with
-`NEXT_PUBLIC_BLAZERS_URL`). There is no bootstrap superuser — grant admin via
+Requires a running server: `backers serve` on `:8090` (override with
+`NEXT_PUBLIC_BACKERS_URL`). There is no bootstrap superuser — grant admin via
 `POST /api/permissions` (see README for the curl).
 
 ## Conventions
 
 - **DaisyUI + Tailwind only** — same rules as landing: utilities in `className`,
-  `data-theme="blazers"`, no custom CSS, no new fonts.
-- All data access goes through `getBlazers()` from `src/lib/blazers.ts` — never
-  instantiate `Blazers` elsewhere or fetch `/api/*` directly.
+  `data-theme="backers"`, no custom CSS, no new fonts.
+- All data access goes through `getBackers()` from `src/lib/backers.ts` — never
+  instantiate `Backers` elsewhere or fetch `/api/*` directly.
 - Components are `'use client'` — the whole app is a client SPA; keep server
   components out unless a page genuinely needs SSR.
 - `react-hooks/set-state-in-effect` is disabled in `eslint.config.mjs`

@@ -1,6 +1,6 @@
 # Realtime
 
-Blazers has three realtime channels, all in-process and all optional — pick per
+Backers has three realtime channels, all in-process and all optional — pick per
 use case.
 
 ## WebSocket — `/ws`
@@ -34,7 +34,7 @@ client→server push or change notifications.
 ## Server-Sent Events — three streams
 
 SSE is one-way (server→client) but works over plain HTTP/1.1 and through most
-proxies. Blazers exposes:
+proxies. Backers exposes:
 
 | Endpoint                    | Stream contents                       |
 | --------------------------- | ------------------------------------- |
@@ -65,7 +65,7 @@ history via `GET /api/pubsub/topics/{name}/messages`.
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" font-family="ui-sans-serif, system-ui, sans-serif">
   <rect x="230" y="90" width="180" height="60" rx="10" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5"/>
-  <text x="320" y="115" text-anchor="middle" fill="#a5b4fc" font-size="12" font-weight="700">blazers</text>
+  <text x="320" y="115" text-anchor="middle" fill="#a5b4fc" font-size="12" font-weight="700">backers</text>
   <text x="320" y="132" text-anchor="middle" fill="#9ca3af" font-size="10">pubsub hub + SQLite</text>
 
   <rect x="30" y="30" width="140" height="44" rx="8" fill="#111827" stroke="#374151"/>

@@ -1,8 +1,8 @@
 'use client';
 
-import type { Bucket, FileRecord } from '@blazers/sdk';
+import type { Bucket, FileRecord } from '@backers/sdk';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getBlazers } from '@/lib/blazers';
+import { getBackers } from '@/lib/backers';
 import { timeAgo } from '@/lib/format';
 
 export default function FilesTab() {
@@ -16,7 +16,7 @@ export default function FilesTab() {
 
   const loadBuckets = useCallback(async () => {
     try {
-      const bs = await getBlazers().files.listBuckets();
+      const bs = await getBackers().files.listBuckets();
       setBuckets(bs);
       setBucket((cur) => cur || bs[0]?.name || '');
     } catch (e) {
@@ -27,7 +27,7 @@ export default function FilesTab() {
   const loadFiles = useCallback(async () => {
     if (!bucket) return;
     try {
-      const page = await getBlazers().files.listFiles(bucket);
+      const page = await getBackers().files.listFiles(bucket);
       setFiles(page.files);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -46,7 +46,7 @@ export default function FilesTab() {
     if (!newBucket.trim()) return;
     setError('');
     try {
-      await getBlazers().files.createBucket(newBucket.trim(), isPublic);
+      await getBackers().files.createBucket(newBucket.trim(), isPublic);
       setNewBucket('');
       setIsPublic(false);
       await loadBuckets();
@@ -59,7 +59,7 @@ export default function FilesTab() {
     if (!bucket) return;
     setError('');
     try {
-      await getBlazers().files.upload(bucket, file);
+      await getBackers().files.upload(bucket, file);
       if (fileInput.current) fileInput.current.value = '';
       await loadFiles();
     } catch (e) {
@@ -69,7 +69,7 @@ export default function FilesTab() {
 
   async function remove(f: FileRecord) {
     try {
-      await getBlazers().files.deleteFile(bucket, f.id);
+      await getBackers().files.deleteFile(bucket, f.id);
       await loadFiles();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -170,7 +170,7 @@ export default function FilesTab() {
                       <td className="flex gap-1">
                         <a
                           className="btn btn-ghost btn-xs"
-                          href={getBlazers().files.downloadUrl(bucket, f.id)}
+                          href={getBackers().files.downloadUrl(bucket, f.id)}
                           target="_blank"
                           rel="noreferrer">
                           open

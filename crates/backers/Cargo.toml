@@ -1,0 +1,29 @@
+[package]
+name = "backers"
+description = "Backers - blazing fast Back-end as a Service in a single binary"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "backers"
+path = "src/main.rs"
+
+[dependencies]
+backers-core = { path = "../backers-core" }
+backers-kv = { path = "../backers-kv" }
+backers-server = { path = "../backers-server" }
+backers-mcp = { path = "../backers-mcp" }
+backers-dbml = { path = "../backers-dbml" }
+tokio.workspace = true
+
+[build-dependencies]
+chrono.workspace = true
+
+[dev-dependencies]
+reqwest.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+totp-rs = { version = "=6.0.0", features = ["gen_secret"] }

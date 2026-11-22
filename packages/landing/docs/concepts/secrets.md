@@ -8,7 +8,7 @@ optional secrets table, but actually encrypted.
 
 - Algorithm: **AES-256-GCM** (`aes-gcm` crate).
 - Key: generated on first run by `secrets::get_or_create_secrets_key` and stored
-  inside `BLAZERS_DATA`. Losing that file means losing the secrets.
+  inside `BACKERS_DATA`. Losing that file means losing the secrets.
 - Only `GET /api/secrets/{id}` returns the **decrypted** value;
   `GET /api/secrets` (list) returns metadata only.
 

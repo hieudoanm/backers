@@ -1,5 +1,5 @@
 {
-  "name": "@blazers/app",
+  "name": "@backers/app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "start": "next start -p 3001"
   },
   "dependencies": {
-    "@blazers/sdk": "workspace:*",
+    "@backers/sdk": "workspace:*",
     "daisyui": "5.8.2",
     "next": "16.4.6",
     "react": "19.3.1",

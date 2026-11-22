@@ -1,7 +1,7 @@
 # Cron jobs
 
 Cron jobs fire HTTP requests on a schedule — PocketBase's "cron" equivalent plus
-what Supabase Edge Functions cron does, minus the function runtime. Blazers
+what Supabase Edge Functions cron does, minus the function runtime. Backers
 doesn't run shell commands; a "job" is an outbound HTTP call.
 
 ## Model

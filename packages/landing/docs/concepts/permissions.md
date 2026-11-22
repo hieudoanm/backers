@@ -1,6 +1,6 @@
 # Permissions (RBAC)
 
-Blazers has a small role-based access layer over collections — simpler than
+Backers has a small role-based access layer over collections — simpler than
 PocketBase's per-collection API rules, closer to Supabase RLS in spirit but
 without row-level policies.
 

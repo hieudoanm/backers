@@ -5,43 +5,43 @@ plain **EC2/ Lightsail VM** running the container (simplest).
 
 ## ECS Fargate + EFS (recommended)
 
-Blazers needs a real filesystem for SQLite — EFS provides the persistent `/data`
+Backers needs a real filesystem for SQLite — EFS provides the persistent `/data`
 volume.
 
 1. **Push the image to ECR**
 
    ```sh
-   aws ecr create-repository --repository-name blazers
+   aws ecr create-repository --repository-name backers
    aws ecr get-login-password | docker login --username AWS \
      --password-stdin <account>.dkr.ecr.<region>.amazonaws.com
-   docker tag ghcr.io/hieudoanm/blazers:latest \
-     <account>.dkr.ecr.<region>.amazonaws.com/blazers:latest
-   docker push <account>.dkr.ecr.<region>.amazonaws.com/blazers:latest
+   docker tag ghcr.io/hieudoanm/backers:latest \
+     <account>.dkr.ecr.<region>.amazonaws.com/backers:latest
+   docker push <account>.dkr.ecr.<region>.amazonaws.com/backers:latest
    ```
 
    (Or build from source in CI and push — see [Terraform](with-terraform.md).)
 
 2. **EFS** — create a filesystem, mount targets in your VPC subnets, and an
-   access point rooted at `/data` with POSIX user `1000` (the `blazers` user's
-   UID in the image — verify with `id blazers` in the container if needed).
+   access point rooted at `/data` with POSIX user `1000` (the `backers` user's
+   UID in the image — verify with `id backers` in the container if needed).
 
 3. **Task definition** — Fargate task, `awsvpc` network mode, one container:
 
    ```json
    {
-     "family": "blazers",
+     "family": "backers",
      "networkMode": "awsvpc",
      "requiresCompatibilities": ["FARGATE"],
      "cpu": "256",
      "memory": "512",
      "containerDefinitions": [
        {
-         "name": "blazers",
-         "image": "<account>.dkr.ecr.<region>.amazonaws.com/blazers:latest",
+         "name": "backers",
+         "image": "<account>.dkr.ecr.<region>.amazonaws.com/backers:latest",
          "portMappings": [{ "containerPort": 8080, "protocol": "tcp" }],
          "environment": [
            { "name": "JWT_SECRET", "value": "…" },
-           { "name": "BLAZERS_DATA", "value": "/data" },
+           { "name": "BACKERS_DATA", "value": "/data" },
            { "name": "PORT", "value": "8080" }
          ],
          "mountPoints": [
@@ -63,9 +63,9 @@ volume.
          "logConfiguration": {
            "logDriver": "awslogs",
            "options": {
-             "awslogs-group": "/ecs/blazers",
+             "awslogs-group": "/ecs/backers",
              "awslogs-region": "<region>",
-             "awslogs-stream-prefix": "blazers"
+             "awslogs-stream-prefix": "backers"
            }
          }
        }
@@ -98,11 +98,11 @@ volume.
 
 ```sh
 # on the instance (Docker installed)
-docker run -d --name blazers --restart unless-stopped \
+docker run -d --name backers --restart unless-stopped \
   -p 8080:8080 \
   -e JWT_SECRET="$(openssl rand -hex 32)" \
-  -v blazers-data:/data \
-  ghcr.io/hieudoanm/blazers:latest
+  -v backers-data:/data \
+  ghcr.io/hieudoanm/backers:latest
 ```
 
 The instance's own disk is the persistent volume — snapshot it for backups, or

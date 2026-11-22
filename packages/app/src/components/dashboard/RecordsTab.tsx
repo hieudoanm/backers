@@ -1,8 +1,8 @@
 'use client';
 
-import type { Collection, RecordData } from '@blazers/sdk';
+import type { Collection, RecordData } from '@backers/sdk';
 import { useCallback, useEffect, useState } from 'react';
-import { getBlazers } from '@/lib/blazers';
+import { getBackers } from '@/lib/backers';
 import { shortId, timeAgo, tryParseJson } from '@/lib/format';
 
 export default function RecordsTab() {
@@ -17,7 +17,7 @@ export default function RecordsTab() {
 
   const loadCollections = useCallback(async () => {
     try {
-      const cols = await getBlazers().collections.list();
+      const cols = await getBackers().collections.list();
       setCollections(cols.filter((c) => c.type !== 'auth'));
     } catch {
       setCollections([]);
@@ -28,7 +28,7 @@ export default function RecordsTab() {
     if (!name) return;
     setError('');
     try {
-      const page = await getBlazers()
+      const page = await getBackers()
         .collection(name)
         .list({ filter: filter || undefined, sort: sort || undefined });
       setRecords(page.records);
@@ -54,7 +54,7 @@ export default function RecordsTab() {
     }
     setError('');
     try {
-      await getBlazers().collection(name).create(data);
+      await getBackers().collection(name).create(data);
       setJson('{}');
       await loadRecords();
     } catch (e) {
@@ -64,7 +64,7 @@ export default function RecordsTab() {
 
   async function deleteRecord(id: string) {
     try {
-      await getBlazers().collection(name).delete(id);
+      await getBackers().collection(name).delete(id);
       await loadRecords();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));

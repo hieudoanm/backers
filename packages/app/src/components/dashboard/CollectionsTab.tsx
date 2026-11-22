@@ -1,8 +1,8 @@
 'use client';
 
-import type { Collection } from '@blazers/sdk';
+import type { Collection } from '@backers/sdk';
 import { useCallback, useEffect, useState } from 'react';
-import { getBlazers } from '@/lib/blazers';
+import { getBackers } from '@/lib/backers';
 
 const EMPTY_RULES = {
   list_rule: '',
@@ -22,7 +22,7 @@ export default function CollectionsTab() {
 
   const load = useCallback(async () => {
     try {
-      setCollections(await getBlazers().collections.list());
+      setCollections(await getBackers().collections.list());
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     }
@@ -50,12 +50,12 @@ export default function CollectionsTab() {
     setError('');
     try {
       if (editing) {
-        await getBlazers().collections.update(editing.name, {
+        await getBackers().collections.update(editing.name, {
           schema,
           ...rules,
         });
       } else {
-        await getBlazers().collections.create(name.trim(), schema);
+        await getBackers().collections.create(name.trim(), schema);
       }
       setEditing(null);
       setName('');
@@ -70,7 +70,7 @@ export default function CollectionsTab() {
   async function remove(c: Collection) {
     if (!confirm(`Delete collection "${c.name}" and all its records?`)) return;
     try {
-      await getBlazers().collections.delete(c.name);
+      await getBackers().collections.delete(c.name);
       await load();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));

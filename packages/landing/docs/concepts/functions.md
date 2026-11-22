@@ -1,6 +1,6 @@
 # Edge functions
 
-Blazers embeds a JavaScript runtime ([QuickJS](https://bellard.org/quickjs/))
+Backers embeds a JavaScript runtime ([QuickJS](https://bellard.org/quickjs/))
 directly in the server binary — no Node, Deno, or sidecar required. Functions
 are stored in the database and executed synchronously per invocation.
 

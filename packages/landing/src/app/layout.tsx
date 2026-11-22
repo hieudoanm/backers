@@ -7,9 +7,9 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const GITHUB = 'https://github.com/hieudoanm/blazers';
+const GITHUB = 'https://github.com/hieudoanm/backers';
 const LOGO =
-  process.env.NODE_ENV === 'production' ? '/blazers/logo.svg' : '/logo.svg';
+  process.env.NODE_ENV === 'production' ? '/backers/logo.svg' : '/logo.svg';
 const NAV_LINKS = [
   { label: 'Features', href: '/#features' },
   { label: 'Versus', href: '/#compare' },
@@ -18,10 +18,10 @@ const NAV_LINKS = [
 ];
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hieudoanm.github.io/blazers/'),
+  metadataBase: new URL('https://hieudoanm.github.io/backers/'),
   title: {
-    default: 'Blazers — blazing fast Back-end as a Service',
-    template: '%s — Blazers',
+    default: 'Backers — blazing fast Back-end as a Service',
+    template: '%s — Backers',
   },
   description:
     'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
@@ -39,40 +39,41 @@ export const metadata: Metadata = {
     'cron jobs',
     'MCP server',
   ],
-  authors: [{ name: 'hieudoan', url: 'https://github.com/hieudoanm/blazers' }],
+  authors: [{ name: 'hieudoan', url: 'https://github.com/hieudoanm/backers' }],
   category: 'software',
   openGraph: {
-    siteName: 'Blazers',
+    siteName: 'Backers',
     type: 'website',
-    title: 'Blazers — blazing fast Back-end as a Service',
+    title: 'Backers — blazing fast Back-end as a Service',
     description:
       'Auth, database, files, realtime, webhooks, cron, secrets and an MCP server — one Rust binary, one SQLite file.',
-    url: 'https://hieudoanm.github.io/blazers/',
+    url: 'https://hieudoanm.github.io/backers/',
     images: ['/og.png'],
   },
   twitter: { card: 'summary_large_image', images: ['/og.png'] },
 };
-
 
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'WebSite',
-      name: 'Blazers',
-      url: 'https://hieudoanm.github.io/blazers/',
-      description: 'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
+      name: 'Backers',
+      url: 'https://hieudoanm.github.io/backers/',
+      description:
+        'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
     },
     {
       '@type': 'SoftwareApplication',
-      name: 'Blazers',
+      name: 'Backers',
       applicationCategory: 'DeveloperApplication',
-      description: 'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
-      url: 'https://hieudoanm.github.io/blazers/',
-      codeRepository: 'https://github.com/hieudoanm/blazers',
+      description:
+        'Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.',
+      url: 'https://hieudoanm.github.io/backers/',
+      codeRepository: 'https://github.com/hieudoanm/backers',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     },
-  ]
+  ],
 };
 
 interface RootLayoutProps {
@@ -82,7 +83,7 @@ interface RootLayoutProps {
 const RootLayout: FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
-    data-theme="blazers"
+    data-theme="backers"
     className={`scroll-smooth antialiased motion-reduce:scroll-auto ${inter.className}`}>
     <body className="bg-base-100 text-base-content m-0 leading-relaxed">
       <script
@@ -90,14 +91,14 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => (
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
       <Navbar
-        name="blazers"
+        name="backers"
         logoSrc={LOGO}
         links={NAV_LINKS}
         githubUrl={GITHUB}
       />
       {children}
       <Footer
-        name="blazers"
+        name="backers"
         tagline="Blazing fast Back-end as a Service · Rust · SQLite · MIT"
         githubUrl={GITHUB}
       />

@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Blazers Demo',
+  title: 'Backers Demo',
   description:
-    'Live demo of the Blazers BaaS — auth, records, realtime, files.',
+    'Live demo of the Backers BaaS — auth, records, realtime, files.',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="blazers">
+    <html lang="en" data-theme="backers">
       <body className="bg-base-200 text-base-content min-h-screen">
         {children}
       </body>

@@ -1,6 +1,6 @@
 # Webhooks
 
-Webhooks deliver HTTP callbacks to your own endpoints whenever Blazers data
+Webhooks deliver HTTP callbacks to your own endpoints whenever Backers data
 changes — the same idea as PocketBase hooks, but outbound-only and configurable
 per event.
 
@@ -26,7 +26,7 @@ cronjob.create    cronjob.update    cronjob.delete
 ### Record hooks (`record.before_*`)
 
 The three `record.before_*` events are **synchronous request hooks** — a
-JSVM-lite escape hatch. Before a record write, Blazers awaits each matching
+JSVM-lite escape hatch. Before a record write, Backers awaits each matching
 webhook (5s timeout) with `{"event", "data": {"collection", "record", "auth"}}`.
 The response can:
 
@@ -40,7 +40,7 @@ Hook deliveries are also written to the webhook log like normal events.
 
 ## Delivery
 
-When an event fires, Blazers POSTs a JSON payload to each active webhook whose
+When an event fires, Backers POSTs a JSON payload to each active webhook whose
 `events` list matches:
 
 ```http
@@ -52,7 +52,7 @@ X-Webhook-Signature-256: <hex hmac-sha256>   # only if webhook.secret set
 ```
 
 The signature is `HMAC-SHA256(secret, body)` hex-encoded — verify it to prove
-the request came from Blazers.
+the request came from Backers.
 
 Payload keys vary by event:
 

@@ -12,9 +12,9 @@ const nextConfig: NextConfig = {
   },
   output: 'export',
   trailingSlash: true,
-  // GitHub Pages project site lives under /blazers/
-  basePath: NODE_ENV === 'production' ? '/blazers' : '',
-  assetPrefix: NODE_ENV === 'production' ? '/blazers' : '',
+  // GitHub Pages project site lives under /backers/
+  basePath: NODE_ENV === 'production' ? '/backers' : '',
+  assetPrefix: NODE_ENV === 'production' ? '/backers' : '',
   images: { unoptimized: true },
 };
 

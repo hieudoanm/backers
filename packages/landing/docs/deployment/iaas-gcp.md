@@ -8,21 +8,21 @@ Heroku/App Runner.
 
 ```sh
 # e2-small is plenty for a single-node BaaS
-gcloud compute instances create blazers \
+gcloud compute instances create backers \
   --zone=us-central1-a --machine-type=e2-small \
   --image-family=debian-12 --image-project=debian-cloud \
   --boot-disk-size=20GB
 
-gcloud compute ssh blazers --zone=us-central1-a
+gcloud compute ssh backers --zone=us-central1-a
 # on the VM:
 sudo apt-get update && sudo apt-get install -y docker.io
 sudo usermod -aG docker $USER   # re-login
 
-docker run -d --name blazers --restart unless-stopped \
+docker run -d --name backers --restart unless-stopped \
   -p 8080:8080 \
   -e JWT_SECRET="$(openssl rand -hex 32)" \
-  -v blazers-data:/data \
-  ghcr.io/hieudoanm/blazers:latest
+  -v backers-data:/data \
+  ghcr.io/hieudoanm/backers:latest
 ```
 
 The boot disk is persistent — snapshot it (`gcloud compute snapshots create`) or
@@ -36,8 +36,8 @@ node is the intended deployment model.
 ## Cloud Run (quick, ephemeral)
 
 ```sh
-gcloud run deploy blazers \
-  --image ghcr.io/hieudoanm/blazers:latest \
+gcloud run deploy backers \
+  --image ghcr.io/hieudoanm/backers:latest \
   --region us-central1 \
   --port 8080 \
   --set-env-vars JWT_SECRET="$(openssl rand -hex 32)" \

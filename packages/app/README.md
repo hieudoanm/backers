@@ -1,7 +1,7 @@
-# Blazers Demo App
+# Backers Demo App
 
-Live demo of the [Blazers](../../README.md) BaaS — Next.js + Tailwind CSS +
-DaisyUI, powered by [`@blazers/sdk`](../../crates/blazers-sdk) — the Rust SDK
+Live demo of the [Backers](../../README.md) BaaS — Next.js + Tailwind CSS +
+DaisyUI, powered by [`@backers/sdk`](../../crates/backers-sdk) — the Rust SDK
 compiled to WASM (`workspace:*` dependency).
 
 ## Features
@@ -19,16 +19,16 @@ compiled to WASM (`workspace:*` dependency).
 
 ```bash
 # 1. SDK must be built once
-pnpm --filter @blazers/sdk build   # wasm-pack → crates/blazers-sdk/pkg/
+pnpm --filter @backers/sdk build   # wasm-pack → crates/backers-sdk/pkg/
 
-# 2. Blazers server (any data dir)
-BLAZERS_DATA=/tmp/blazers-demo PORT=8090 JWT_SECRET=dev ./target/debug/blazers serve
+# 2. Backers server (any data dir)
+BACKERS_DATA=/tmp/backers-demo PORT=8090 JWT_SECRET=dev ./target/debug/backers serve
 
 # 3. Demo app
 cd packages/app && npm install && npm run dev   # http://localhost:3001
 ```
 
-Configure the server URL with `NEXT_PUBLIC_BLAZERS_URL` (default
+Configure the server URL with `NEXT_PUBLIC_BACKERS_URL` (default
 `http://localhost:8090`).
 
 > **Note:** there is no bootstrap superuser — the first account you register has

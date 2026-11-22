@@ -290,6 +290,130 @@ dependencies = [
 ]
 
 [[package]]
+name = "backers"
+version = "0.0.1"
+dependencies = [
+ "backers-core",
+ "backers-dbml",
+ "backers-kv",
+ "backers-mcp",
+ "backers-server",
+ "chrono",
+ "reqwest",
+ "serde_json",
+ "tokio",
+ "totp-rs",
+ "uuid",
+]
+
+[[package]]
+name = "backers-core"
+version = "0.0.1"
+dependencies = [
+ "axum",
+ "chrono",
+ "deadpool",
+ "rusqlite",
+ "serde",
+ "serde_json",
+ "uuid",
+]
+
+[[package]]
+name = "backers-dbml"
+version = "0.0.1"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "backers-kv"
+version = "0.0.1"
+dependencies = [
+ "backers-core",
+ "chrono",
+ "deadpool",
+ "rusqlite",
+ "serde_json",
+ "tempfile",
+ "tokio",
+]
+
+[[package]]
+name = "backers-mcp"
+version = "0.0.1"
+dependencies = [
+ "backers-core",
+ "backers-dbml",
+ "rusqlite",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "uuid",
+]
+
+[[package]]
+name = "backers-sdk"
+version = "0.0.1"
+dependencies = [
+ "futures-util",
+ "js-sys",
+ "reqwest",
+ "serde",
+ "serde-wasm-bindgen",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "tokio-tungstenite 0.28.0",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+]
+
+[[package]]
+name = "backers-server"
+version = "0.0.1"
+dependencies = [
+ "aes-gcm",
+ "axum",
+ "backers-core",
+ "backers-dbml",
+ "backers-kv",
+ "bcrypt",
+ "chrono",
+ "criterion",
+ "cron",
+ "deadpool",
+ "futures",
+ "hex",
+ "hmac",
+ "http-body-util",
+ "image",
+ "infer",
+ "jsonwebtoken",
+ "lettre",
+ "mime_guess",
+ "multer",
+ "rand 0.10.4",
+ "reqwest",
+ "rquickjs",
+ "rusqlite",
+ "rust-embed",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tempfile",
+ "tokio",
+ "tokio-stream",
+ "tokio-tungstenite 0.30.0",
+ "totp-rs",
+ "tower",
+ "tower-http 0.7.1",
+ "uuid",
+]
+
+[[package]]
 name = "base16ct"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -351,130 +475,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7eff00be299a18769011411c9def0d827e8f2d7bf0c3dbf53633147a8867fd1f"
 dependencies = [
  "no_std_io2",
-]
-
-[[package]]
-name = "blazers"
-version = "0.0.1"
-dependencies = [
- "blazers-core",
- "blazers-dbml",
- "blazers-kv",
- "blazers-mcp",
- "blazers-server",
- "chrono",
- "reqwest",
- "serde_json",
- "tokio",
- "totp-rs",
- "uuid",
-]
-
-[[package]]
-name = "blazers-core"
-version = "0.0.1"
-dependencies = [
- "axum",
- "chrono",
- "deadpool",
- "rusqlite",
- "serde",
- "serde_json",
- "uuid",
-]
-
-[[package]]
-name = "blazers-dbml"
-version = "0.0.1"
-dependencies = [
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "blazers-kv"
-version = "0.0.1"
-dependencies = [
- "blazers-core",
- "chrono",
- "deadpool",
- "rusqlite",
- "serde_json",
- "tempfile",
- "tokio",
-]
-
-[[package]]
-name = "blazers-mcp"
-version = "0.0.1"
-dependencies = [
- "blazers-core",
- "blazers-dbml",
- "rusqlite",
- "serde",
- "serde_json",
- "tempfile",
- "uuid",
-]
-
-[[package]]
-name = "blazers-sdk"
-version = "0.0.1"
-dependencies = [
- "futures-util",
- "js-sys",
- "reqwest",
- "serde",
- "serde-wasm-bindgen",
- "serde_json",
- "thiserror",
- "tokio",
- "tokio-tungstenite 0.28.0",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
-]
-
-[[package]]
-name = "blazers-server"
-version = "0.0.1"
-dependencies = [
- "aes-gcm",
- "axum",
- "bcrypt",
- "blazers-core",
- "blazers-dbml",
- "blazers-kv",
- "chrono",
- "criterion",
- "cron",
- "deadpool",
- "futures",
- "hex",
- "hmac",
- "http-body-util",
- "image",
- "infer",
- "jsonwebtoken",
- "lettre",
- "mime_guess",
- "multer",
- "rand 0.10.4",
- "reqwest",
- "rquickjs",
- "rusqlite",
- "rust-embed",
- "serde",
- "serde_json",
- "sha2",
- "tempfile",
- "tokio",
- "tokio-stream",
- "tokio-tungstenite 0.30.0",
- "totp-rs",
- "tower",
- "tower-http 0.7.1",
- "uuid",
 ]
 
 [[package]]

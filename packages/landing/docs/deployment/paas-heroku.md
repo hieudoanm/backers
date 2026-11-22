@@ -1,6 +1,6 @@
 # Deploy to Heroku
 
-Heroku runs containers via the container stack. Blazers works, but with an
+Heroku runs containers via the container stack. Backers works, but with an
 important caveat: **Heroku has no persistent filesystem**, so `data.db` and
 uploads are wiped on every dyno restart.
 
@@ -16,33 +16,33 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: blazers serve
+  web: backers serve
 ```
 
 Then:
 
 ```sh
-heroku create my-blazers
-heroku stack:set container -a my-blazers
+heroku create my-backers
+heroku stack:set container -a my-backers
 git push heroku main
-heroku ps:scale web=1 -a my-blazers
-heroku open -a my-blazers
+heroku ps:scale web=1 -a my-backers
+heroku open -a my-backers
 ```
 
-Heroku assigns `$PORT` dynamically — Blazers reads `PORT`, so it binds correctly
+Heroku assigns `$PORT` dynamically — Backers reads `PORT`, so it binds correctly
 with no changes.
 
 ## Environment variables
 
 ```sh
-heroku config:set JWT_SECRET="$(openssl rand -hex 32)" -a my-blazers
+heroku config:set JWT_SECRET="$(openssl rand -hex 32)" -a my-backers
 ```
 
-`BLAZERS_DATA` defaults to `~/.blazers` inside the dyno — ephemeral. Optionally
+`BACKERS_DATA` defaults to `~/.backers` inside the dyno — ephemeral. Optionally
 set it explicitly for clarity:
 
 ```sh
-heroku config:set BLAZERS_DATA=/app/data -a my-blazers
+heroku config:set BACKERS_DATA=/app/data -a my-backers
 ```
 
 ## Surviving restarts
@@ -51,7 +51,7 @@ Since the filesystem is ephemeral, schedule backups to durable storage:
 
 - `GET /api/backup` with an admin token → upload the snapshot to S3/R2 on a
   schedule (e.g. Heroku Scheduler + a small script).
-- On boot, restore by downloading the snapshot to `$BLAZERS_DATA/data.db`.
+- On boot, restore by downloading the snapshot to `$BACKERS_DATA/data.db`.
 
 ## Alternative: buildpack
 

@@ -1,12 +1,12 @@
 # Quickstart
 
-This guide takes you from zero to a working Blazers backend in a few minutes.
+This guide takes you from zero to a working Backers backend in a few minutes.
 All examples use `curl` against the default `http://localhost:8080`.
 
 ## 1. Start the server
 
 ```sh
-blazers serve
+backers serve
 ```
 
 ## 2. Register a user, then log in
@@ -80,7 +80,7 @@ curl -X POST http://localhost:8080/api/collections \
 # create
 curl -X POST http://localhost:8080/api/collections/posts/records \
   -H "$AUTH" -H 'Content-Type: application/json' \
-  -d '{"data": {"title": "Hello Blazers", "body": "First post", "views": 0, "draft": false}}'
+  -d '{"data": {"title": "Hello Backers", "body": "First post", "views": 0, "draft": false}}'
 
 # list (paginated, searchable)
 curl "http://localhost:8080/api/collections/posts/records?page=1&per_page=20&search=Hello" \
@@ -99,7 +99,7 @@ Record list responses are paginated:
 
 ```json
 {
-  "records": [ { "id": "...", "data": { "title": "Hello Blazers", ... },
+  "records": [ { "id": "...", "data": { "title": "Hello Backers", ... },
                  "created_at": "...", "updated_at": "..." } ],
   "total": 1, "page": 1, "per_page": 20, "total_pages": 1
 }

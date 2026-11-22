@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
 @plugin 'daisyui' {
-  themes: blazers --default;
+  themes: backers --default;
 }
 
 @plugin 'daisyui/theme' {
-  name: 'blazers';
+  name: 'backers';
   default: true;
   prefersdark: false;
   color-scheme: 'light';

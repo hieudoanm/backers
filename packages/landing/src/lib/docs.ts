@@ -3,10 +3,10 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 
 const DOCS_DIR = path.join(process.cwd(), 'docs');
-const REPO_BLOB = 'https://github.com/hieudoanm/blazers/blob/master';
+const REPO_BLOB = 'https://github.com/hieudoanm/backers/blob/master';
 // Must match basePath in next.config.ts (GitHub Pages project site).
 // Used in raw HTML hrefs, so basePath is not applied automatically.
-const BASE_PATH = process.env.NODE_ENV === 'production' ? '/blazers' : '';
+const BASE_PATH = process.env.NODE_ENV === 'production' ? '/backers' : '';
 
 export interface DocHeading {
   /** Anchor id added by addHeadingIds */
