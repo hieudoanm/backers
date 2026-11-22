@@ -11,6 +11,11 @@ description = "Rust client SDK for the Blazers BaaS — auth, records, files, re
 [lib]
 crate-type = ["rlib", "cdylib"]
 
+# wasm-pack's bundled wasm-opt rejects the wasm features current rustc emits
+# (e.g. i64.trunc_sat_f64_s) — skip the opt pass; size is fine for a client SDK.
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
 [dependencies]
 serde = { workspace = true }
 serde_json = { workspace = true }
