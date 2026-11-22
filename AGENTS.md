@@ -36,12 +36,12 @@ cargo fmt --all
 make all                         # fmt-check + clippy + test + release build
 ```
 
-JS workspace (`packages/{landing,sdk,app}` — pnpm + Turborepo):
+JS workspace (`packages/{landing,app}` + `crates/backers-sdk` — pnpm + Turborepo):
 
 ```bash
 pnpm install        # workspace install (never npm install — pnpm manages it)
 pnpm dev            # turbo run dev → landing :3000 + app :3001
-pnpm build          # turbo run build (sdk dist + both Next apps)
+pnpm build          # turbo run build (sdk wasm pkg + both Next apps)
 pnpm lint           # turbo run lint
 pnpm test           # turbo run test (vitest)
 pnpm typecheck      # turbo run typecheck
