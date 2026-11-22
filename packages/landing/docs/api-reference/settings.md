@@ -49,7 +49,7 @@ Remove a setting. `204` / `404`.
 | `smtp_from`       | `From:` address (defaults to `smtp_user`)                    |
 | `app_url`         | Public base URL used in reset/verify email links             |
 | `backup_schedule` | Cron expression for scheduled backups; empty disables        |
-| `backup_dir`      | Backup output dir (default `$BLAZERS_DATA/backups`)          |
+| `backup_dir`      | Backup output dir (default `$BACKERS_DATA/backups`)          |
 | `backup_keep`     | Max snapshots retained, oldest pruned first (`0` = keep all) |
 
 ## Scheduled backups
@@ -59,7 +59,7 @@ writes `VACUUM INTO` snapshots to `backup_dir`, pruned to `backup_keep` files.
 Changes apply within ~30s without restart. Trigger one manually:
 
 ```
-POST /api/backup/run   →  { "path": ".../blazers-backup-20240101-030000.db" }
+POST /api/backup/run   →  { "path": ".../backers-backup-20240101-030000.db" }
 ```
 
 Download the live DB anytime via `GET /api/backup`.

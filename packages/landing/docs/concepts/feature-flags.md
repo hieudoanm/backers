@@ -14,7 +14,7 @@ resolved through `POST /api/flags/evaluate`.
   "enabled": true,
   "rules": [
     { "attribute": "plan", "op": "eq", "value": "pro" },
-    { "attribute": "email", "op": "ends_with", "value": "@blazers.dev" }
+    { "attribute": "email", "op": "ends_with", "value": "@backers.dev" }
   ],
   "payload": { "variant": "v2", "max_cart": 50 },
   "description": "New checkout flow for pro users"
@@ -47,7 +47,7 @@ The evaluation context is built per request from two sources:
    `user_id` and `email` are added automatically. These win over context keys of
    the same name.
 2. **`context`** — any JSON object the client passes in the evaluate body, for
-   attributes Blazers doesn't know about (`plan`, `country`, `app_version`, …).
+   attributes Backers doesn't know about (`plan`, `country`, `app_version`, …).
 
 ```json
 POST /api/flags/evaluate
@@ -113,9 +113,9 @@ Every mutation broadcasts a `_flags` record-change event on the WebSocket hub
 (`collection: "_flags"`), so subscribed clients can invalidate cached flag state
 immediately.
 
-Flags are also reachable outside HTTP: the `@blazers/sdk` client exposes
+Flags are also reachable outside HTTP: the `@backers/sdk` client exposes
 `bz.flags` (`list`/`get`/`upsert`/`update`/`remove`/`evaluate`), and the MCP
-server exposes `blazers_flags_*` tools that share the same `_flags` table — a
+server exposes `backers_flags_*` tools that share the same `_flags` table — a
 flag written over MCP is live for `evaluate` immediately.
 
 ## Patterns

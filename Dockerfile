@@ -5,7 +5,7 @@ FROM rust:1-bookworm AS builder
 WORKDIR /src
 COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates
-RUN cargo build --release -p blazers --locked
+RUN cargo build --release -p backers --locked
 
 # ---- runtime ----
 FROM debian:bookworm-slim
@@ -13,18 +13,18 @@ FROM debian:bookworm-slim
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
-    && groupadd --system blazers \
-    && useradd --system --gid blazers --home-dir /data \
-        --shell /usr/sbin/nologin blazers \
+    && groupadd --system backers \
+    && useradd --system --gid backers --home-dir /data \
+        --shell /usr/sbin/nologin backers \
     && mkdir -p /data \
-    && chown blazers:blazers /data
+    && chown backers:backers /data
 
-COPY --from=builder /src/target/release/blazers /usr/local/bin/blazers
+COPY --from=builder /src/target/release/backers /usr/local/bin/backers
 
-ENV BLAZERS_DATA=/data \
+ENV BACKERS_DATA=/data \
     PORT=8080
 VOLUME ["/data"]
 EXPOSE 8080
 
-USER blazers
-CMD ["blazers", "serve"]
+USER backers
+CMD ["backers", "serve"]

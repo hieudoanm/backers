@@ -1,0 +1,19 @@
+[package]
+name = "backers-mcp"
+description = "Backers MCP server: expose collections and records as MCP tools over stdio"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+backers-core = { path = "../backers-core" }
+backers-dbml = { path = "../backers-dbml" }
+serde.workspace = true
+serde_json.workspace = true
+rusqlite.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+tempfile = "=3.27.0"

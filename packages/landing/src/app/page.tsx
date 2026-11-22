@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
-const GITHUB = 'https://github.com/hieudoanm/blazers';
+const GITHUB = 'https://github.com/hieudoanm/backers';
 // next/image with unoptimized does not apply basePath — mirror next.config.ts.
 const LOGO =
-  process.env.NODE_ENV === 'production' ? '/blazers/logo.svg' : '/logo.svg';
+  process.env.NODE_ENV === 'production' ? '/backers/logo.svg' : '/logo.svg';
 
 type Support = boolean | 'na';
 
@@ -261,7 +261,7 @@ const FEATURES: Feature[] = [
   },
   {
     title: 'MCP server',
-    body: 'blazers mcp serve exposes collections and records as Model Context Protocol tools — let an AI agent read and write your backend over stdio.',
+    body: 'backers mcp serve exposes collections and records as Model Context Protocol tools — let an AI agent read and write your backend over stdio.',
     icon: LuCpu,
   },
   {
@@ -277,7 +277,7 @@ const Home: NextPage = () => (
       {/* hero */}
       <Hero
         title="Your whole backend, in one blazing fast binary."
-        description="Blazers is a Back-end as a Service written in Rust: auth, a schema-less database, file storage, realtime streams, webhooks, cron jobs, encrypted secrets, pub/sub and an admin dashboard — all persisted to a single SQLite file. No Docker, no accounts, no cloud."
+        description="Backers is a Back-end as a Service written in Rust: auth, a schema-less database, file storage, realtime streams, webhooks, cron jobs, encrypted secrets, pub/sub and an admin dashboard — all persisted to a single SQLite file. No Docker, no accounts, no cloud."
         primary={{ label: 'Get started', href: '#quickstart' }}
         secondary={{ label: 'Source on GitHub', href: GITHUB, external: true }}
         stats={[
@@ -290,11 +290,11 @@ const Home: NextPage = () => (
             [
               { t: '$ ', c: 'prompt' },
               { t: 'cargo', c: 'cmd' },
-              { t: ' install blazers' },
+              { t: ' install backers' },
             ],
             [
               { t: '$ ', c: 'prompt' },
-              { t: 'blazers', c: 'cmd' },
+              { t: 'backers', c: 'cmd' },
             ],
             [
               { t: 'Server running at ', c: 'dim' },
@@ -385,7 +385,7 @@ const Home: NextPage = () => (
                             rust
                           </span>
                           <span className="text-primary font-bold">
-                            Blazers
+                            Backers
                           </span>
                         </span>
                       </th>
@@ -423,7 +423,7 @@ const Home: NextPage = () => (
           </div>
           <p className="mt-4 text-center text-sm text-gray-500">
             Comparing deployment model, auth, storage, realtime and ops surface
-            — not raw throughput. Blazers aims for PocketBase&apos;s simplicity
+            — not raw throughput. Backers aims for PocketBase&apos;s simplicity
             with more of Supabase&apos;s feature set.
           </p>
         </div>
@@ -451,14 +451,14 @@ const Home: NextPage = () => (
                   { t: '$ ', c: 'prompt' },
                   { t: 'git', c: 'cmd' },
                   {
-                    t: ' clone https://github.com/hieudoanm/blazers',
+                    t: ' clone https://github.com/hieudoanm/backers',
                     c: 'url',
                   },
                 ],
                 [
                   { t: '$ ', c: 'prompt' },
                   { t: 'cd', c: 'cmd' },
-                  { t: ' blazers', c: 'dim' },
+                  { t: ' backers', c: 'dim' },
                 ],
                 [
                   { t: '$ ', c: 'prompt' },
@@ -466,11 +466,11 @@ const Home: NextPage = () => (
                   { t: ' build ', c: 'dim' },
                   { t: '--release', c: 'flag' },
                   { t: ' -p ', c: 'dim' },
-                  { t: 'blazers', c: 'flag' },
+                  { t: 'backers', c: 'flag' },
                 ],
                 [
                   { t: '$ ', c: 'prompt' },
-                  { t: './target/release/blazers', c: 'cmd' },
+                  { t: './target/release/backers', c: 'cmd' },
                 ],
                 [
                   { t: '➜ ', c: 'prompt' },
@@ -557,15 +557,15 @@ const Home: NextPage = () => (
             </Link>{' '}
             · MCP server:{' '}
             <code className="rounded border border-gray-200 bg-gray-50 px-1 py-px font-mono text-sm">
-              blazers mcp serve
+              backers mcp serve
             </code>
             . Data in{' '}
             <code className="rounded border border-gray-200 bg-gray-50 px-1 py-px font-mono text-sm">
-              ~/.blazers/
+              ~/.backers/
             </code>{' '}
             — set{' '}
             <code className="rounded border border-gray-200 bg-gray-50 px-1 py-px font-mono text-sm">
-              BLAZERS_DATA
+              BACKERS_DATA
             </code>
             ,{' '}
             <code className="rounded border border-gray-200 bg-gray-50 px-1 py-px font-mono text-sm">

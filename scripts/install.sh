@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# install.sh — Install blazers from the latest GitHub release, or build from
+# install.sh — Install backers from the latest GitHub release, or build from
 # source if no prebuilt binary is published.
 #
 # Usage:
@@ -8,10 +8,10 @@
 #   INSTALL_DIR=/usr/local/bin ./scripts/install.sh
 set -euo pipefail
 
-REPO="hieudoanm/blazers"
+REPO="hieudoanm/backers"
 INSTALL_DIR="${INSTALL_DIR:-$HOME/.local/bin}"
 
-echo "Installing blazers..."
+echo "Installing backers..."
 
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 ARCH="$(uname -m)"
@@ -26,17 +26,17 @@ case "$OS" in
     *)      TRIPLE="x86_64-pc-windows-msvc" ;;
 esac
 
-BINARY_URL="https://github.com/${REPO}/releases/latest/download/blazers-${TRIPLE}"
+BINARY_URL="https://github.com/${REPO}/releases/latest/download/backers-${TRIPLE}"
 [[ "$OS" != "linux" && "$OS" != "darwin" ]] && BINARY_URL="${BINARY_URL}.exe"
 
 if command -v curl >/dev/null 2>&1; then
-    if curl -fsSL "$BINARY_URL" -o /tmp/blazers 2>/dev/null; then
-        chmod +x /tmp/blazers
+    if curl -fsSL "$BINARY_URL" -o /tmp/backers 2>/dev/null; then
+        chmod +x /tmp/backers
         mkdir -p "$INSTALL_DIR"
-        install -m 0755 /tmp/blazers "$INSTALL_DIR/blazers"
-        rm -f /tmp/blazers
-        echo "blazers installed to ${INSTALL_DIR}/blazers"
-        "$INSTALL_DIR/blazers" --help >/dev/null
+        install -m 0755 /tmp/backers "$INSTALL_DIR/backers"
+        rm -f /tmp/backers
+        echo "backers installed to ${INSTALL_DIR}/backers"
+        "$INSTALL_DIR/backers" --help >/dev/null
         exit 0
     fi
 fi
@@ -49,10 +49,10 @@ fi
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 cd "$TMP_DIR"
-git clone --depth 1 "https://github.com/${REPO}.git" blazers
-cd blazers
-cargo build --release -p blazers
+git clone --depth 1 "https://github.com/${REPO}.git" backers
+cd backers
+cargo build --release -p backers
 mkdir -p "$INSTALL_DIR"
-install -m 0755 target/release/blazers "$INSTALL_DIR/blazers"
-echo "blazers installed to ${INSTALL_DIR}/blazers"
-"$INSTALL_DIR/blazers" --help >/dev/null
+install -m 0755 target/release/backers "$INSTALL_DIR/backers"
+echo "backers installed to ${INSTALL_DIR}/backers"
+"$INSTALL_DIR/backers" --help >/dev/null

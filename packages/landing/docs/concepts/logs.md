@@ -39,5 +39,5 @@ webhooks — so external systems can tail your app's log stream.
 ## What writes here
 
 Anything that calls the API — your app, cron jobs reporting results, or the
-admin dashboard's "Add log" action. Blazers itself writes HTTP access logs to
+admin dashboard's "Add log" action. Backers itself writes HTTP access logs to
 stdout only; it does **not** mirror them into this table.

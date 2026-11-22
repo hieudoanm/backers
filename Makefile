@@ -15,16 +15,16 @@ test:
 	cargo test --workspace
 
 build:
-	cargo build --release -p blazers
+	cargo build --release -p backers
 
 check:
 	cargo check --workspace --all-targets
 
 run:
-	cargo run -p blazers --release -- serve
+	cargo run -p backers --release -- serve
 
 mcp:
-	cargo run -p blazers --release -- mcp serve
+	cargo run -p backers --release -- mcp serve
 
 clean:
 	cargo clean

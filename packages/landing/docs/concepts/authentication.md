@@ -1,6 +1,6 @@
 # Authentication
 
-Blazers uses email + password auth with JWT bearer tokens. There are no OAuth
+Backers uses email + password auth with JWT bearer tokens. There are no OAuth
 providers or MFA — the model is deliberately minimal, like PocketBase's `users`
 auth collection.
 
@@ -64,7 +64,7 @@ Authorization: Bearer eyJhbGciOi...
 
 Tokens are HS256 JWTs signed with `JWT_SECRET` (default
 `dev-secret-change-in-production` — override it in production). See
-`extract_claims` in `crates/blazers-server/src/auth.rs` for the exact claim
+`extract_claims` in `crates/backers-server/src/auth.rs` for the exact claim
 shape (`sub` = user id).
 
 ## Error cases
@@ -85,7 +85,7 @@ re-login on `401`.
 ## User profiles
 
 `GET/PATCH /api/auth/me` exposes the user record: `id`, `email`, `verified`,
-custom `data` fields (free-form JSON — Blazers' lightweight take on PocketBase
+custom `data` fields (free-form JSON — Backers' lightweight take on PocketBase
 auth-record fields), and timestamps.
 
 ## Password reset & email verification

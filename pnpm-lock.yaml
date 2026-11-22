@@ -197,13 +197,13 @@ importers:
         specifier: 2.11.13
         version: 2.11.13
 
-  crates/blazers-sdk: {}
+  crates/backers-sdk: {}
 
   packages/app:
     dependencies:
-      '@blazers/sdk':
+      '@backers/sdk':
         specifier: workspace:*
-        version: link:../../crates/blazers-sdk
+        version: link:../../crates/backers-sdk
       daisyui:
         specifier: 5.8.2
         version: 5.8.2

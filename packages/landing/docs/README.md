@@ -1,6 +1,6 @@
-# Blazers documentation
+# Backers documentation
 
-Blazers is a single-binary Backend-as-a-Service: SQLite database, auth, file
+Backers is a single-binary Backend-as-a-Service: SQLite database, auth, file
 storage, realtime, webhooks, cache, notifications, logs, cron, a secrets vault,
 an admin dashboard, and an MCP server — all in one Rust executable.
 

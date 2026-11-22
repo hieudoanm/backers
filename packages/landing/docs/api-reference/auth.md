@@ -151,7 +151,7 @@ must be the public base URL — providers redirect back to
 - `GET /api/auth/oauth/{provider}/callback?code=&state=` — verifies the signed
   state, exchanges the code, finds-or-creates the user by email (OAuth-only
   accounts have no password; the provider subject is stored in
-  `data.oauth_{provider}`) and returns a `LoginResponse` with a Blazers JWT.
+  `data.oauth_{provider}`) and returns a `LoginResponse` with a Backers JWT.
 
 ## Token refresh & MFA
 

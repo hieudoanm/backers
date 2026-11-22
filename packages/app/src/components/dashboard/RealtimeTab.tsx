@@ -1,8 +1,8 @@
 'use client';
 
-import type { Collection, RealtimeEvent } from '@blazers/sdk';
+import type { Collection, RealtimeEvent } from '@backers/sdk';
 import { useEffect, useRef, useState } from 'react';
-import { getBlazers } from '@/lib/blazers';
+import { getBackers } from '@/lib/backers';
 import { timeAgo } from '@/lib/format';
 
 const MAX_EVENTS = 100;
@@ -22,14 +22,14 @@ export default function RealtimeTab() {
   const logRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getBlazers()
+    getBackers()
       .collections.list()
       .then((cols) => setCollections(cols.filter((c) => c.type !== 'auth')))
       .catch(() => setCollections([]));
   }, []);
 
   useEffect(() => {
-    const rt = getBlazers().realtime;
+    const rt = getBackers().realtime;
     let alive = true;
     void rt.connect().then(() => alive && setConnected(true));
     const off = rt.onMessage((data) => {
@@ -51,7 +51,7 @@ export default function RealtimeTab() {
   }, [events]);
 
   async function toggleSubscribe(name: string) {
-    const rt = getBlazers().realtime;
+    const rt = getBackers().realtime;
     if (selected === name) {
       await rt.unsubscribe(name);
       setSelected('');
@@ -63,7 +63,7 @@ export default function RealtimeTab() {
   }
 
   async function joinPresence() {
-    await getBlazers().realtime.presenceJoin(presenceChannel, {
+    await getBackers().realtime.presenceJoin(presenceChannel, {
       state: { demo: true },
     });
   }

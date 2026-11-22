@@ -1,65 +1,65 @@
-# Blazers
+# Backers
 
 > Auth, a schema-less database, file storage, realtime, webhooks, cron, secrets, pub/sub and an admin dashboard — in one Rust binary on a single SQLite file. Inspired by PocketBase and Supabase.
 
-- Repository: https://github.com/hieudoanm/blazers
-- Site: https://hieudoanm.github.io/blazers/
+- Repository: https://github.com/hieudoanm/backers
+- Site: https://hieudoanm.github.io/backers/
 
 ## Documentation
 
 ### api-reference
 
-- [API conventions](https://hieudoanm.github.io/blazers/docs/api-reference/conventions/)
-- [Admin & ops API](https://hieudoanm.github.io/blazers/docs/api-reference/admin/)
-- [Auth API](https://hieudoanm.github.io/blazers/docs/api-reference/auth/)
-- [Buckets API](https://hieudoanm.github.io/blazers/docs/api-reference/buckets/)
-- [Cache API](https://hieudoanm.github.io/blazers/docs/api-reference/cache/)
-- [Collections API](https://hieudoanm.github.io/blazers/docs/api-reference/collections/)
-- [Cron Jobs API](https://hieudoanm.github.io/blazers/docs/api-reference/cronjobs/)
-- [Files API](https://hieudoanm.github.io/blazers/docs/api-reference/files/)
-- [Functions API](https://hieudoanm.github.io/blazers/docs/api-reference/functions/)
-- [Logs API](https://hieudoanm.github.io/blazers/docs/api-reference/logs/)
-- [Notifications API](https://hieudoanm.github.io/blazers/docs/api-reference/notifications/)
-- [Permissions API](https://hieudoanm.github.io/blazers/docs/api-reference/permissions/)
-- [Pub/Sub API](https://hieudoanm.github.io/blazers/docs/api-reference/pubsub/)
-- [Records API](https://hieudoanm.github.io/blazers/docs/api-reference/records/)
-- [Secrets API](https://hieudoanm.github.io/blazers/docs/api-reference/secrets/)
-- [Settings API](https://hieudoanm.github.io/blazers/docs/api-reference/settings/)
-- [WebSockets API](https://hieudoanm.github.io/blazers/docs/api-reference/websockets/)
-- [Webhooks API](https://hieudoanm.github.io/blazers/docs/api-reference/webhooks/)
+- [API conventions](https://hieudoanm.github.io/backers/docs/api-reference/conventions/)
+- [Admin & ops API](https://hieudoanm.github.io/backers/docs/api-reference/admin/)
+- [Auth API](https://hieudoanm.github.io/backers/docs/api-reference/auth/)
+- [Buckets API](https://hieudoanm.github.io/backers/docs/api-reference/buckets/)
+- [Cache API](https://hieudoanm.github.io/backers/docs/api-reference/cache/)
+- [Collections API](https://hieudoanm.github.io/backers/docs/api-reference/collections/)
+- [Cron Jobs API](https://hieudoanm.github.io/backers/docs/api-reference/cronjobs/)
+- [Files API](https://hieudoanm.github.io/backers/docs/api-reference/files/)
+- [Functions API](https://hieudoanm.github.io/backers/docs/api-reference/functions/)
+- [Logs API](https://hieudoanm.github.io/backers/docs/api-reference/logs/)
+- [Notifications API](https://hieudoanm.github.io/backers/docs/api-reference/notifications/)
+- [Permissions API](https://hieudoanm.github.io/backers/docs/api-reference/permissions/)
+- [Pub/Sub API](https://hieudoanm.github.io/backers/docs/api-reference/pubsub/)
+- [Records API](https://hieudoanm.github.io/backers/docs/api-reference/records/)
+- [Secrets API](https://hieudoanm.github.io/backers/docs/api-reference/secrets/)
+- [Settings API](https://hieudoanm.github.io/backers/docs/api-reference/settings/)
+- [WebSockets API](https://hieudoanm.github.io/backers/docs/api-reference/websockets/)
+- [Webhooks API](https://hieudoanm.github.io/backers/docs/api-reference/webhooks/)
 ### concepts
 
-- [Architecture](https://hieudoanm.github.io/blazers/docs/concepts/architecture/)
-- [Authentication](https://hieudoanm.github.io/blazers/docs/concepts/authentication/)
-- [Buckets & files](https://hieudoanm.github.io/blazers/docs/concepts/buckets-and-files/)
-- [Cache](https://hieudoanm.github.io/blazers/docs/concepts/cache/)
-- [Collections & records](https://hieudoanm.github.io/blazers/docs/concepts/collections/)
-- [Cron jobs](https://hieudoanm.github.io/blazers/docs/concepts/cron-jobs/)
-- [Edge functions](https://hieudoanm.github.io/blazers/docs/concepts/functions/)
-- [Logs](https://hieudoanm.github.io/blazers/docs/concepts/logs/)
-- [Notifications](https://hieudoanm.github.io/blazers/docs/concepts/notifications/)
-- [Permissions (RBAC)](https://hieudoanm.github.io/blazers/docs/concepts/permissions/)
-- [Realtime](https://hieudoanm.github.io/blazers/docs/concepts/realtime/)
-- [Secrets](https://hieudoanm.github.io/blazers/docs/concepts/secrets/)
-- [Webhooks](https://hieudoanm.github.io/blazers/docs/concepts/webhooks/)
+- [Architecture](https://hieudoanm.github.io/backers/docs/concepts/architecture/)
+- [Authentication](https://hieudoanm.github.io/backers/docs/concepts/authentication/)
+- [Buckets & files](https://hieudoanm.github.io/backers/docs/concepts/buckets-and-files/)
+- [Cache](https://hieudoanm.github.io/backers/docs/concepts/cache/)
+- [Collections & records](https://hieudoanm.github.io/backers/docs/concepts/collections/)
+- [Cron jobs](https://hieudoanm.github.io/backers/docs/concepts/cron-jobs/)
+- [Edge functions](https://hieudoanm.github.io/backers/docs/concepts/functions/)
+- [Logs](https://hieudoanm.github.io/backers/docs/concepts/logs/)
+- [Notifications](https://hieudoanm.github.io/backers/docs/concepts/notifications/)
+- [Permissions (RBAC)](https://hieudoanm.github.io/backers/docs/concepts/permissions/)
+- [Realtime](https://hieudoanm.github.io/backers/docs/concepts/realtime/)
+- [Secrets](https://hieudoanm.github.io/backers/docs/concepts/secrets/)
+- [Webhooks](https://hieudoanm.github.io/backers/docs/concepts/webhooks/)
 ### deployment
 
-- [Deploy to AWS](https://hieudoanm.github.io/blazers/docs/deployment/iaas-aws/)
-- [Deploy to Azure](https://hieudoanm.github.io/blazers/docs/deployment/iaas-azure/)
-- [Deploy to GCP](https://hieudoanm.github.io/blazers/docs/deployment/iaas-gcp/)
-- [Deploy to Heroku](https://hieudoanm.github.io/blazers/docs/deployment/paas-heroku/)
-- [Deploy to Render](https://hieudoanm.github.io/blazers/docs/deployment/paas-render/)
-- [Deploy with Docker](https://hieudoanm.github.io/blazers/docs/deployment/with-docker/)
-- [Deploy with Terraform](https://hieudoanm.github.io/blazers/docs/deployment/with-terraform/)
-- [Deployment](https://hieudoanm.github.io/blazers/docs/deployment/)
+- [Deploy to AWS](https://hieudoanm.github.io/backers/docs/deployment/iaas-aws/)
+- [Deploy to Azure](https://hieudoanm.github.io/backers/docs/deployment/iaas-azure/)
+- [Deploy to GCP](https://hieudoanm.github.io/backers/docs/deployment/iaas-gcp/)
+- [Deploy to Heroku](https://hieudoanm.github.io/backers/docs/deployment/paas-heroku/)
+- [Deploy to Render](https://hieudoanm.github.io/backers/docs/deployment/paas-render/)
+- [Deploy with Docker](https://hieudoanm.github.io/backers/docs/deployment/with-docker/)
+- [Deploy with Terraform](https://hieudoanm.github.io/backers/docs/deployment/with-terraform/)
+- [Deployment](https://hieudoanm.github.io/backers/docs/deployment/)
 ### getting-started
 
-- [Installation](https://hieudoanm.github.io/blazers/docs/getting-started/installation/)
-- [Quickstart](https://hieudoanm.github.io/blazers/docs/getting-started/quickstart/)
+- [Installation](https://hieudoanm.github.io/backers/docs/getting-started/installation/)
+- [Quickstart](https://hieudoanm.github.io/backers/docs/getting-started/quickstart/)
 ### guides
 
-- [Admin dashboard](https://hieudoanm.github.io/blazers/docs/guides/admin-dashboard/)
-- [MCP server](https://hieudoanm.github.io/blazers/docs/guides/mcp-server/)
+- [Admin dashboard](https://hieudoanm.github.io/backers/docs/guides/admin-dashboard/)
+- [MCP server](https://hieudoanm.github.io/backers/docs/guides/mcp-server/)
 ### overview
 
-- [Blazers documentation](https://hieudoanm.github.io/blazers/docs/)
+- [Backers documentation](https://hieudoanm.github.io/backers/docs/)

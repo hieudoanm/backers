@@ -1,6 +1,6 @@
 # Deployment
 
-Blazers is designed to run anywhere a single static binary or container runs — a
+Backers is designed to run anywhere a single static binary or container runs — a
 VPS, a container platform, a Raspberry Pi, or a CI job. There is no external
 service to provision.
 
@@ -28,15 +28,15 @@ Step-by-step setup for each target:
 
 ```sh
 export JWT_SECRET="$(openssl rand -hex 32)"   # required in production
-export BLAZERS_DATA=/var/lib/blazers
+export BACKERS_DATA=/var/lib/backers
 export PORT=8080
-blazers serve
+backers serve
 ```
 
 That's it. The server:
 
-- creates `BLAZERS_DATA` and `data.db` on first run (migrations automatic)
-- generates the secrets-vault key inside `BLAZERS_DATA`
+- creates `BACKERS_DATA` and `data.db` on first run (migrations automatic)
+- generates the secrets-vault key inside `BACKERS_DATA`
 - serves the API, admin dashboard (`/`), OpenAPI (`/api/docs`), and all realtime
   streams on `PORT`
 
@@ -44,14 +44,14 @@ That's it. The server:
 
 ```ini
 [Unit]
-Description=Blazers BaaS
+Description=Backers BaaS
 After=network.target
 
 [Service]
-Environment=JWT_SECRET=... BLAZERS_DATA=/var/lib/blazers PORT=8080
-ExecStart=/usr/local/bin/blazers serve
+Environment=JWT_SECRET=... BACKERS_DATA=/var/lib/backers PORT=8080
+ExecStart=/usr/local/bin/backers serve
 Restart=always
-User=blazers
+User=backers
 
 [Install]
 WantedBy=multi-user.target
@@ -59,7 +59,7 @@ WantedBy=multi-user.target
 
 ## Behind a reverse proxy
 
-Blazers is plain HTTP/1.1 — put Caddy/nginx in front for TLS:
+Backers is plain HTTP/1.1 — put Caddy/nginx in front for TLS:
 
 ```caddyfile
 api.example.com {
@@ -75,17 +75,17 @@ your proxy buffers by default.
 
 Three options, simplest first:
 
-1. **File copy** — stop the server, copy `BLAZERS_DATA/` (SQLite + files +
+1. **File copy** — stop the server, copy `BACKERS_DATA/` (SQLite + files +
    secrets key). To back up live, use option 2.
 2. **`GET /api/backup`** — admin-only SQLite snapshot download; restore by
    placing the file as `data.db`.
 3. **`GET /api/export`** — portable JSON (collections, records, buckets, file
-   metadata); pair with a copy of `BLAZERS_DATA/files/` for bytes.
+   metadata); pair with a copy of `BACKERS_DATA/files/` for bytes.
 
 ## Security checklist
 
 - [ ] `JWT_SECRET` set to a long random value (not the default)
-- [ ] `BLAZERS_DATA` on encrypted storage; secrets key backed up separately
+- [ ] `BACKERS_DATA` on encrypted storage; secrets key backed up separately
 - [ ] Rate limiting is per-IP — front with a proxy if you need global limits
 - [ ] SSE streams (`/api/logs/stream`, `/api/pubsub/*/stream`,
       `/api/notifications/stream`) are **unauthenticated** — restrict them at
@@ -97,7 +97,7 @@ Three options, simplest first:
 
 ## Scaling notes
 
-Blazers is single-node by design: one process, one SQLite file, in-memory cache
+Backers is single-node by design: one process, one SQLite file, in-memory cache
 and realtime hubs. It comfortably handles thousands of concurrent SSE/WS
 connections and moderate write throughput. For multi-node you would need
 external Postgres/Redis — at that point you're past the "one binary" value

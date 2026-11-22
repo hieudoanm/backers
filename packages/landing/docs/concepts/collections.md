@@ -1,6 +1,6 @@
 # Collections & records
 
-Collections are the heart of Blazers — the equivalent of PocketBase collections
+Collections are the heart of Backers — the equivalent of PocketBase collections
 and Supabase tables, but with a deliberately small surface.
 
 ## Collections
@@ -65,7 +65,7 @@ additive.
 A record is `{ id, data, created_at, updated_at }`. `data` is arbitrary JSON;
 typed schema fields are validated on every write. Validation lives in the
 storage layer (`insert_record`/`update_record`), so it applies uniformly to REST
-record endpoints, `?batch=1` sub-requests, the MCP `blazers_records_*` tools,
+record endpoints, `?batch=1` sub-requests, the MCP `backers_records_*` tools,
 and data imports — internal services cannot bypass it. Invalid writes are
 rejected with `400` before anything is stored.
 

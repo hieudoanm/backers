@@ -9,29 +9,29 @@ VMs.
 ### 1. Resource group + storage
 
 ```sh
-az group create -n rg-blazers -l eastus
-az storage account create -n stblazers$RANDOM -g rg-blazers \
+az group create -n rg-backers -l eastus
+az storage account create -n stbackers$RANDOM -g rg-backers \
   --sku Standard_LRS
-az storage share create -n blazers-data \
+az storage share create -n backers-data \
   --account-name <storage-account> --quota 1
 ```
 
 ### 2. Container App
 
 ```sh
-az containerapp env create -n cae-blazers -g rg-blazers \
+az containerapp env create -n cae-backers -g rg-backers \
   --location eastus
 
-az containerapp create -n blazers -g rg-blazers \
-  --environment cae-blazers \
-  --image ghcr.io/hieudoanm/blazers:latest \
+az containerapp create -n backers -g rg-backers \
+  --environment cae-backers \
+  --image ghcr.io/hieudoanm/backers:latest \
   --target-port 8080 \
   --ingress external \
   --min-replicas 1 --max-replicas 1 \
   --cpu 0.5 --memory 1Gi \
-  --env-vars JWT_SECRET="$(openssl rand -hex 32)" PORT=8080 BLAZERS_DATA=/data \
-  --volumes blazers-data=/data \
-  --volume-mounts /data=blazers-data
+  --env-vars JWT_SECRET="$(openssl rand -hex 32)" PORT=8080 BACKERS_DATA=/data \
+  --volumes backers-data=/data \
+  --volume-mounts /data=backers-data
 ```
 
 For the volume you must first create an **Azure Files-backed volume** on the
@@ -43,8 +43,8 @@ uses `az containerapp env storage set`.
 Alternatively deploy from source with the repo `Dockerfile`:
 
 ```sh
-az containerapp up -n blazers -g rg-blazers \
-  --environment cae-blazers --source . \
+az containerapp up -n backers -g rg-backers \
+  --environment cae-backers --source . \
   --target-port 8080 --ingress external
 ```
 

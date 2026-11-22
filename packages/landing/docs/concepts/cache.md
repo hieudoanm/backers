@@ -57,15 +57,15 @@ See [Cache API](../api-reference/cache.md) for request/response details and
 
 ## KV TCP listener
 
-`blazers kv` exposes the same `CacheStore` over a Redis-style inline TCP
+`backers kv` exposes the same `CacheStore` over a Redis-style inline TCP
 protocol (port 6379 by default) — `SET`/`GET`/`DEL`/`KEYS`/`EXPIRE`/`TTL` plus
 `INCR`, list and hash commands. It shares the SQLite `_cache` table, so REST and
-TCP clients see one dataset. `BLAZERS_KV_PASSWORD` enables `AUTH`.
+TCP clients see one dataset. `BACKERS_KV_PASSWORD` enables `AUTH`.
 
 ## Internals
 
 `CacheStore` is an `Arc<RwLock<HashMap>>` in
-`crates/blazers-server/src/cache.rs`:
+`crates/backers-server/src/cache.rs`:
 
 - `set` computes `expires_at` from `ttl` and upserts.
 - An eviction loop runs periodically to drop expired entries.
@@ -80,4 +80,4 @@ TCP clients see one dataset. `BLAZERS_KV_PASSWORD` enables `AUTH`.
 - Rate-limit counters or idempotency keys (short TTLs)
 
 It is **not** a substitute for Redis when you need multi-node coherence — each
-Blazers instance has its own cache.
+Backers instance has its own cache.

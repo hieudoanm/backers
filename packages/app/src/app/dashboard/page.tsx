@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { clearSession, getBlazers, isAuthed } from '@/lib/blazers';
+import { clearSession, getBackers, isAuthed } from '@/lib/backers';
 import CollectionsTab from '@/components/dashboard/CollectionsTab';
 import FilesTab from '@/components/dashboard/FilesTab';
 import RealtimeTab from '@/components/dashboard/RealtimeTab';
@@ -36,7 +36,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <p className="text-base-content/60 text-sm">
-            {getBlazers().http.baseUrl}
+            {getBackers().http.baseUrl}
           </p>
         </div>
         <div className="flex gap-2">

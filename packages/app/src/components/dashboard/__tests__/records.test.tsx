@@ -1,23 +1,23 @@
-import type { Blazers } from '@blazers/sdk';
+import type { Backers } from '@backers/sdk';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import RecordsTab from '../RecordsTab';
-import { makeBlazersStub, type BlazersStub } from './stub';
+import { makeBackersStub, type BackersStub } from './stub';
 
-const holder = vi.hoisted(() => ({ bz: null as unknown as Blazers }));
+const holder = vi.hoisted(() => ({ bz: null as unknown as Backers }));
 
-vi.mock('@/lib/blazers', () => ({
-  getBlazers: () => holder.bz,
+vi.mock('@/lib/backers', () => ({
+  getBackers: () => holder.bz,
   isAuthed: () => true,
   saveSession: vi.fn(),
   clearSession: vi.fn(),
 }));
 
-let stub: BlazersStub;
+let stub: BackersStub;
 
 beforeEach(() => {
-  stub = makeBlazersStub();
-  holder.bz = stub.raw as unknown as Blazers;
+  stub = makeBackersStub();
+  holder.bz = stub.raw as unknown as Backers;
 });
 
 const COL = {

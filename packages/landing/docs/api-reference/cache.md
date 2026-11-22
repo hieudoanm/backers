@@ -123,12 +123,12 @@ curl -X POST localhost:8090/api/cache/user:42/hash \
 
 ## KV TCP protocol {#kv-tcp-protocol}
 
-`blazers kv [--port 6379] [--bind 127.0.0.1]` serves the same cache over a
+`backers kv [--port 6379] [--bind 127.0.0.1]` serves the same cache over a
 Redis-style **inline protocol**: one command per line, one reply per line —
 compatible with kevin and usable with `nc`, `telnet`, or any line client.
 
 ```sh
-$ blazers kv --port 6379 &
+$ backers kv --port 6379 &
 $ printf 'PING\nSET k v EX 30\nGET k\nTTL k\n' | nc 127.0.0.1 6379
 PONG
 OK
@@ -159,5 +159,5 @@ v
 
 Errors are `ERR …` lines; type mismatches are `ERR WRONGTYPE …`.
 
-Set `BLAZERS_KV_PASSWORD` to require `AUTH password` before any other command
+Set `BACKERS_KV_PASSWORD` to require `AUTH password` before any other command
 (`NOAUTH` until authenticated, `WRONGPASS` on a bad password).

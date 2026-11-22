@@ -1,11 +1,11 @@
 # Deploy with Docker
 
 The repo ships a multi-stage `Dockerfile`: a Rust builder stage compiles the
-release binary, then a slim Debian runtime runs it as a non-root `blazers` user.
+release binary, then a slim Debian runtime runs it as a non-root `backers` user.
 `ca-certificates` is included so outbound HTTPS (webhooks, OAuth, SMTP) works
 out of the box.
 
-The image sets `BLAZERS_DATA=/data` and `PORT=8080` by default. Mount a volume
+The image sets `BACKERS_DATA=/data` and `PORT=8080` by default. Mount a volume
 at `/data` — it holds `data.db`, uploaded files and the secrets key.
 
 ## Prebuilt image
@@ -13,36 +13,36 @@ at `/data` — it holds `data.db`, uploaded files and the secrets key.
 Published to GHCR on every push to `master`:
 
 ```sh
-docker run -d --name blazers -p 8080:8080 \
+docker run -d --name backers -p 8080:8080 \
   -e JWT_SECRET="$(openssl rand -hex 32)" \
-  -v blazers-data:/data \
-  ghcr.io/hieudoanm/blazers:latest
+  -v backers-data:/data \
+  ghcr.io/hieudoanm/backers:latest
 # → http://localhost:8080 (admin UI at /, API docs at /api/docs)
 ```
 
 ## Build from source
 
 ```sh
-docker build -t blazers .
-docker run -d --name blazers -p 8080:8080 \
+docker build -t backers .
+docker run -d --name backers -p 8080:8080 \
   -e JWT_SECRET="$(openssl rand -hex 32)" \
-  -v blazers-data:/data \
-  blazers
+  -v backers-data:/data \
+  backers
 ```
 
 ## Docker Compose
 
 ```yaml
 services:
-  blazers:
-    image: ghcr.io/hieudoanm/blazers:latest
+  backers:
+    image: ghcr.io/hieudoanm/backers:latest
     ports: ['8080:8080']
     environment:
       JWT_SECRET: change-me
     volumes:
-      - blazers-data:/data
+      - backers-data:/data
 volumes:
-  blazers-data:
+  backers-data:
 ```
 
 `docker compose up -d` → http://localhost:8080
@@ -52,9 +52,9 @@ volumes:
 | Variable              | Default      | Purpose                                       |
 | --------------------- | ------------ | --------------------------------------------- |
 | `PORT`                | `8080`       | HTTP listen port                              |
-| `BLAZERS_DATA`        | `~/.blazers` | Data dir (`data.db`, `files/`, `secrets.key`) |
+| `BACKERS_DATA`        | `~/.backers` | Data dir (`data.db`, `files/`, `secrets.key`) |
 | `JWT_SECRET`          | generated    | JWT signing secret — **set in production**    |
-| `BLAZERS_SECRETS_KEY` | generated    | Vault encryption key — back it up             |
+| `BACKERS_SECRETS_KEY` | generated    | Vault encryption key — back it up             |
 | `OAUTH_*`             | —            | OAuth provider client id/secret pairs         |
 
 ## Health checks
@@ -64,7 +64,7 @@ volumes:
 
 ## Notes
 
-- The container runs as the non-root `blazers` user; the named volume handles
+- The container runs as the non-root `backers` user; the named volume handles
   permissions automatically.
 - SQLite lives on the mounted volume — do **not** put `/data` on a network
   filesystem (NFS/SMB); use a local volume or block storage.

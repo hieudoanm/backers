@@ -8,9 +8,11 @@ Cargo.lock.bak
 !.env.example
 node_modules/
 dist/
-crates/blazers-sdk/pkg/
-crates/blazers-sdk/pkg-node/
+crates/backers-sdk/pkg/
+crates/backers-sdk/pkg-node/
 packages/landing/.next/
 packages/landing/out/
 .turbo/
 browsers/
+.backers-data/
+*.db

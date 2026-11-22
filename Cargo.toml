@@ -1,13 +1,13 @@
 [workspace]
 resolver = "2"
 members = [
-    "crates/blazers-core",
-    "crates/blazers-kv",
-    "crates/blazers-dbml",
-    "crates/blazers-server",
-    "crates/blazers-mcp",
-    "crates/blazers-sdk",
-    "crates/blazers",
+    "crates/backers-core",
+    "crates/backers-kv",
+    "crates/backers-dbml",
+    "crates/backers-server",
+    "crates/backers-mcp",
+    "crates/backers-sdk",
+    "crates/backers",
 ]
 
 [workspace.package]
@@ -15,7 +15,7 @@ version = "0.0.1"
 edition = "2024"
 rust-version = "1.89.0"
 license = "MIT"
-repository = "https://github.com/hieudoanm/blazers"
+repository = "https://github.com/hieudoanm/backers"
 
 [workspace.dependencies]
 axum = "=0.8.9"

@@ -1,6 +1,6 @@
 # Admin dashboard
 
-Blazers ships a built-in admin UI — no separate frontend to deploy. It is
+Backers ships a built-in admin UI — no separate frontend to deploy. It is
 embedded into the binary (`rust-embed`) and served at `/`.
 
 ## Stack
@@ -50,6 +50,6 @@ pitfalls we've hit:
 
 ## Customizing
 
-Edit `crates/blazers-server/public/index.html` and `styles.css`, then rebuild —
+Edit `crates/backers-server/public/index.html` and `styles.css`, then rebuild —
 `rust-embed` bakes the assets into the binary at compile time. Touch a `.rs`
-file (or `cargo clean -p blazers-server`) to force the re-embed.
+file (or `cargo clean -p backers-server`) to force the re-embed.

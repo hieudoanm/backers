@@ -1,6 +1,6 @@
 # Deploy with Terraform
 
-Blazers is a container + a persistent volume + env vars — a small Terraform
+Backers is a container + a persistent volume + env vars — a small Terraform
 surface on every cloud. Below is a complete **AWS ECS Fargate + EFS** example;
 the same shape maps to Azure Container Apps and GCE.
 
@@ -15,15 +15,15 @@ terraform {
 
 provider "aws" { region = "us-east-1" }
 
-resource "aws_ecr_repository" "blazers" {
-  name = "blazers"
+resource "aws_ecr_repository" "backers" {
+  name = "backers"
 }
 
-# Push ghcr.io/hieudoanm/blazers:latest to ECR once (see aws.md), or build
+# Push ghcr.io/hieudoanm/backers:latest to ECR once (see aws.md), or build
 # in CI and reference the image URI directly.
 
 resource "aws_efs_file_system" "data" {
-  creation_token = "blazers-data"
+  creation_token = "backers-data"
   encrypted      = true
 }
 
@@ -34,10 +34,10 @@ resource "aws_efs_mount_target" "data" {
   security_groups = [aws_security_group.efs.id]
 }
 
-resource "aws_ecs_cluster" "blazers" { name = "blazers" }
+resource "aws_ecs_cluster" "backers" { name = "backers" }
 
 resource "aws_iam_role" "task" {
-  name = "blazers-task"
+  name = "backers-task"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -54,7 +54,7 @@ resource "aws_iam_role_policy_attachment" "task_exec" {
 }
 
 resource "aws_security_group" "efs" {
-  name   = "blazers-efs"
+  name   = "backers-efs"
   vpc_id = var.vpc_id
   ingress {
     from_port   = 2049
@@ -64,8 +64,8 @@ resource "aws_security_group" "efs" {
   }
 }
 
-resource "aws_ecs_task_definition" "blazers" {
-  family                   = "blazers"
+resource "aws_ecs_task_definition" "backers" {
+  family                   = "backers"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
@@ -82,13 +82,13 @@ resource "aws_ecs_task_definition" "blazers" {
   }
 
   container_definitions = jsonencode([{
-    name      = "blazers"
-    image     = "${aws_ecr_repository.blazers.repository_url}:latest"
+    name      = "backers"
+    image     = "${aws_ecr_repository.backers.repository_url}:latest"
     essential = true
     portMappings = [{ containerPort = 8080 }]
     environment = [
       { name = "JWT_SECRET", value = var.jwt_secret },
-      { name = "BLAZERS_DATA", value = "/data" },
+      { name = "BACKERS_DATA", value = "/data" },
       { name = "PORT", value = "8080" }
     ]
     mountPoints = [{
@@ -98,18 +98,18 @@ resource "aws_ecs_task_definition" "blazers" {
     logConfiguration = {
       logDriver = "awslogs"
       options = {
-        "awslogs-group"         = "/ecs/blazers"
+        "awslogs-group"         = "/ecs/backers"
         "awslogs-region"        = "us-east-1"
-        "awslogs-stream-prefix" = "blazers"
+        "awslogs-stream-prefix" = "backers"
       }
     }
   }])
 }
 
-resource "aws_ecs_service" "blazers" {
-  name            = "blazers"
-  cluster         = aws_ecs_cluster.blazers.id
-  task_definition = aws_ecs_task_definition.blazers.arn
+resource "aws_ecs_service" "backers" {
+  name            = "backers"
+  cluster         = aws_ecs_cluster.backers.id
+  task_definition = aws_ecs_task_definition.backers.arn
   desired_count   = 1
   launch_type     = "FARGATE"
 
@@ -128,37 +128,37 @@ Variables: `vpc_id`, `subnet_ids`, `jwt_secret` (`TF_VAR_jwt_secret`, mark it
 ## Azure: Container Apps
 
 ```hcl
-resource "azurerm_resource_group" "blazers" {
-  name     = "rg-blazers"
+resource "azurerm_resource_group" "backers" {
+  name     = "rg-backers"
   location = "East US"
 }
 
 resource "azurerm_storage_account" "data" {
-  name                     = "stblazers${random_string.suffix.result}"
-  resource_group_name      = azurerm_resource_group.blazers.name
-  location                 = azurerm_resource_group.blazers.location
+  name                     = "stbackers${random_string.suffix.result}"
+  resource_group_name      = azurerm_resource_group.backers.name
+  location                 = azurerm_resource_group.backers.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
 resource "azurerm_storage_share" "data" {
-  name                 = "blazers-data"
+  name                 = "backers-data"
   storage_account_name = azurerm_storage_account.data.name
   quota                = 1
 }
 
-resource "azurerm_container_app_environment" "blazers" {
-  name                       = "cae-blazers"
-  location                   = azurerm_resource_group.blazers.location
-  resource_group_name        = azurerm_resource_group.blazers.name
+resource "azurerm_container_app_environment" "backers" {
+  name                       = "cae-backers"
+  location                   = azurerm_resource_group.backers.location
+  resource_group_name        = azurerm_resource_group.backers.name
   infrastructure_subnet_id   = azurerm_subnet.apps.id
   internal_load_balancer_enabled = false
 }
 
-resource "azurerm_container_app" "blazers" {
-  name                         = "blazers"
-  container_app_environment_id = azurerm_container_app_environment.blazers.id
-  resource_group_name          = azurerm_resource_group.blazers.name
+resource "azurerm_container_app" "backers" {
+  name                         = "backers"
+  container_app_environment_id = azurerm_container_app_environment.backers.id
+  resource_group_name          = azurerm_resource_group.backers.name
   revision_mode                = "Single"
 
   template {
@@ -166,8 +166,8 @@ resource "azurerm_container_app" "blazers" {
     max_replicas = 1
 
     container {
-      name   = "blazers"
-      image  = "ghcr.io/hieudoanm/blazers:latest"
+      name   = "backers"
+      image  = "ghcr.io/hieudoanm/backers:latest"
       cpu    = 0.5
       memory = "1Gi"
 
@@ -175,7 +175,7 @@ resource "azurerm_container_app" "blazers" {
         name  = "JWT_SECRET"
         value = var.jwt_secret
       }
-      env { name = "BLAZERS_DATA"; value = "/data" }
+      env { name = "BACKERS_DATA"; value = "/data" }
       env { name = "PORT";        value = "8080" }
 
       volume_mounts {
@@ -210,8 +210,8 @@ The simplest GCP path is a VM + Docker — Terraform is a
 `google_compute_instance` with a startup script:
 
 ```hcl
-resource "google_compute_instance" "blazers" {
-  name         = "blazers"
+resource "google_compute_instance" "backers" {
+  name         = "backers"
   machine_type = "e2-small"
   zone         = "us-central1-a"
 
@@ -231,11 +231,11 @@ resource "google_compute_instance" "blazers" {
     #!/bin/bash
     apt-get update && apt-get install -y docker.io
     systemctl enable --now docker
-    docker run -d --name blazers --restart unless-stopped \
+    docker run -d --name backers --restart unless-stopped \
       -p 8080:8080 \
       -e JWT_SECRET="${var.jwt_secret}" \
-      -v blazers-data:/data \
-      ghcr.io/hieudoanm/blazers:latest
+      -v backers-data:/data \
+      ghcr.io/hieudoanm/backers:latest
   EOT
 }
 ```
@@ -245,8 +245,8 @@ path is eval-only.
 
 ## General notes
 
-- **One instance.** Blazers is single-node by design (SQLite + in-memory
+- **One instance.** Backers is single-node by design (SQLite + in-memory
   realtime hubs). `min_replicas`/`desired_count` stay at 1 everywhere.
-- **Secrets**: pass `JWT_SECRET`/`BLAZERS_SECRETS_KEY` via the platform's secret
+- **Secrets**: pass `JWT_SECRET`/`BACKERS_SECRETS_KEY` via the platform's secret
   store (SSM/Key Vault/Secret Manager), never commit them.
 - **Health check**: `/api/health` on the load balancer/ingress.

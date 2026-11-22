@@ -1,8 +1,8 @@
-# blazers landing page
+# backers landing page
 
-The landing page and documentation site for blazers — a Next.js (App Router)
+The landing page and documentation site for backers — a Next.js (App Router)
 static-export site with Tailwind CSS v4, deployed to GitHub Pages at
-<https://hieudoanm.github.io/blazers>.
+<https://hieudoanm.github.io/backers>.
 
 ## Structure
 
@@ -21,11 +21,11 @@ static-export site with Tailwind CSS v4, deployed to GitHub Pages at
 ```bash
 cd packages/landing
 pnpm install
-pnpm run dev      # http://localhost:3000/blazers/
+pnpm run dev      # http://localhost:3000/backers/
 pnpm run build    # static export → out/
 ```
 
-`basePath`/`assetPrefix` are `/blazers` in `next.config.ts` (GitHub Pages
+`basePath`/`assetPrefix` are `/backers` in `next.config.ts` (GitHub Pages
 project site). `lib/docs.ts` `BASE_PATH` must match.
 
 ## Deploy

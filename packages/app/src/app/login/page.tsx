@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { BlazersError } from '@blazers/sdk';
-import { getBlazers, isAuthed, saveSession } from '@/lib/blazers';
+import { BackersError } from '@backers/sdk';
+import { getBackers, isAuthed, saveSession } from '@/lib/backers';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     setBusy(true);
-    const bz = getBlazers();
+    const bz = getBackers();
     try {
       if (otpStage) {
         const res = await bz.auth.authWithOtp(email, otp);
@@ -59,7 +59,7 @@ export default function LoginPage() {
       saveSession((res as { token: string }).token);
       router.push('/dashboard');
     } catch (err) {
-      setError(err instanceof BlazersError ? err.message : String(err));
+      setError(err instanceof BackersError ? err.message : String(err));
     } finally {
       setBusy(false);
     }
@@ -69,11 +69,11 @@ export default function LoginPage() {
     setError('');
     setBusy(true);
     try {
-      const res = await getBlazers().auth.requestOtp(email);
+      const res = await getBackers().auth.requestOtp(email);
       setOtpStage(true);
       if (res.dev_otp) setOtp(res.dev_otp);
     } catch (err) {
-      setError(err instanceof BlazersError ? err.message : String(err));
+      setError(err instanceof BackersError ? err.message : String(err));
     } finally {
       setBusy(false);
     }

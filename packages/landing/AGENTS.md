@@ -1,4 +1,4 @@
-# AGENTS.md — blazers landing page
+# AGENTS.md — backers landing page
 
 Guidance for AI agents working on the landing page (`packages/landing`). See the
 root [`AGENTS.md`](../../AGENTS.md) for repository-wide conventions.
@@ -6,22 +6,22 @@ root [`AGENTS.md`](../../AGENTS.md) for repository-wide conventions.
 ## Overview
 
 Next.js 16 (App Router) static-export site + Tailwind CSS v4, deployed to GitHub
-Pages at `https://hieudoanm.github.io/blazers` (project site —
-`basePath: "/blazers"`).
+Pages at `https://hieudoanm.github.io/backers` (project site —
+`basePath: "/backers"`).
 
 ## Layout
 
 - `src/app/page.tsx` — landing page (hero, features, PocketBase comparison,
   quickstart terminals, CTA, footer)
 - `src/app/docs/[[...slug]]/page.tsx` — docs catch-all; renders every Markdown
-  file under `docs/` as a static page at `/blazers/docs/<path>/`
+  file under `docs/` as a static page at `/backers/docs/<path>/`
 - `src/app/globals.css` — `@import 'tailwindcss'` + official plugins only:
-  `@tailwindcss/typography` for docs prose and DaisyUI with a custom `blazers`
+  `@tailwindcss/typography` for docs prose and DaisyUI with a custom `backers`
   theme (see Styling below)
 - `lib/docs.ts` — Markdown → HTML pipeline (`marked`), relative-link rewriting
-  to `/blazers/docs/*`, GitHub-style heading ids
+  to `/backers/docs/*`, GitHub-style heading ids
 - `docs/` — documentation source (moved from the repo-root `docs/`)
-- `public/` — static assets served under `/blazers/`
+- `public/` — static assets served under `/backers/`
 - `src/app/icon.svg`, `src/app/favicon.ico` — Next metadata file conventions
 
 ## Commands
@@ -29,7 +29,7 @@ Pages at `https://hieudoanm.github.io/blazers` (project site —
 ```sh
 cd packages/landing
 pnpm install
-pnpm run dev     # dev server (basePath applies: /blazers/)
+pnpm run dev     # dev server (basePath applies: /backers/)
 pnpm run build   # static export → out/ (uploaded to Pages by CI)
 ```
 
@@ -42,11 +42,11 @@ pnpm run build   # static export → out/ (uploaded to Pages by CI)
 
 - **Keep `output: "export"`** — the site must build to static HTML; no server
   features, no API routes, no `next/image` optimization.
-- **`basePath`/`assetPrefix` are `/blazers`.** `next/link` and metadata get it
+- **`basePath`/`assetPrefix` are `/backers`.** `next/link` and metadata get it
   automatically; raw `<a href>` and generated HTML links must include it (see
   `BASE_PATH` in `lib/docs.ts`).
 - **DaisyUI + Tailwind v4** — `globals.css` has only `@import 'tailwindcss'`
-  plus official plugins; the `blazers` theme (set via `data-theme` on `<html>`)
+  plus official plugins; the `backers` theme (set via `data-theme` on `<html>`)
   maps `primary` to flame orange (`#c2410c`). Use DaisyUI components (`btn`,
   `badge`, `card`) and theme tokens (`bg-base-100`, `text-base-content`,
   `text-primary`, `bg-primary/10`) — no custom CSS.

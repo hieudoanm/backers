@@ -5,18 +5,18 @@
   <circle cx="56" cy="40" r="8" fill="#ff5f57"/>
   <circle cx="84" cy="40" r="8" fill="#febc2e"/>
   <circle cx="112" cy="40" r="8" fill="#28c840"/>
-  <text x="640" y="47" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace" font-size="17" fill="#8a8a8a">blazers — zsh</text>
+  <text x="640" y="47" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace" font-size="17" fill="#8a8a8a">backers — zsh</text>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="0.80s" dur="0.25s" fill="freeze"/>
-    <text x="44" y="126"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">blazers --version</tspan></text>
+    <text x="44" y="126"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">backers --version</tspan></text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="1.35s" dur="0.25s" fill="freeze"/>
-    <text x="44" y="158" fill="#9ca3af">blazers 0.1.0</text>
+    <text x="44" y="158" fill="#9ca3af">backers 0.1.0</text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="1.90s" dur="0.25s" fill="freeze"/>
-    <text x="44" y="190"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">blazers serve --port 3000</tspan></text>
+    <text x="44" y="190"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">backers serve --port 3000</tspan></text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="2.45s" dur="0.25s" fill="freeze"/>
@@ -24,7 +24,7 @@
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="3.00s" dur="0.25s" fill="freeze"/>
-    <text x="44" y="254"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">blazers kv --port 6379</tspan></text>
+    <text x="44" y="254"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">backers kv --port 6379</tspan></text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="3.55s" dur="0.25s" fill="freeze"/>
@@ -44,7 +44,7 @@
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="5.75s" dur="0.25s" fill="freeze"/>
-    <text x="44" y="414"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">blazers mcp serve</tspan></text>
+    <text x="44" y="414"><tspan fill="#ff8a5c">$</tspan> <tspan fill="#e5e5e5">backers mcp serve</tspan></text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" from="0" to="1" begin="6.30s" dur="0.25s" fill="freeze"/>

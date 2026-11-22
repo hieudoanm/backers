@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 # One-shot demo setup: installs the workspace, builds the SDK + binary,
-# starts `blazers serve`, seeds a demo account, then runs the Next.js app.
+# starts `backers serve`, seeds a demo account, then runs the Next.js app.
 #
 #   ./scripts/setup.sh          # full setup + dev server on :3001
-#   BLAZERS_DATA=/tmp/x PORT=9090 ./scripts/setup.sh
+#   BACKERS_DATA=/tmp/x PORT=9090 ./scripts/setup.sh
 #
-# Ctrl+C stops the app and the Blazers server.
+# Ctrl+C stops the app and the Backers server.
 set -euo pipefail
 
 APP_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 ROOT_DIR="$(cd "$APP_DIR/../.." && pwd)"
 cd "$APP_DIR"
 
-DATA_DIR="${BLAZERS_DATA:-$APP_DIR/.blazers-data}"
+DATA_DIR="${BACKERS_DATA:-$APP_DIR/.backers-data}"
 PORT="${PORT:-8090}"
 API="http://localhost:${PORT}"
-DEMO_EMAIL="${DEMO_EMAIL:-demo@blazers.dev}"
+DEMO_EMAIL="${DEMO_EMAIL:-demo@backers.dev}"
 DEMO_PASSWORD="${DEMO_PASSWORD:-demo1234}"
-BINARY="$ROOT_DIR/target/debug/blazers"
+BINARY="$ROOT_DIR/target/debug/backers"
 SERVER_PID=""
 
 cleanup() {
@@ -31,19 +31,19 @@ say() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 say "Installing workspace dependencies (pnpm)"
 (cd "$ROOT_DIR" && pnpm install)
 
-say "Building @blazers/sdk"
-pnpm --filter @blazers/sdk run build
+say "Building /sdk"
+pnpm --filter @backers/sdk run build
 
-# --- 2. Blazers binary ------------------------------------------------------
+# --- 2. Backers binary ------------------------------------------------------
 if [ ! -x "$BINARY" ]; then
-  say "Building blazers binary (cargo build -p blazers)"
-  (cd "$ROOT_DIR" && cargo build -p blazers)
+  say "Building backers binary (cargo build -p backers)"
+  (cd "$ROOT_DIR" && cargo build -p backers)
 fi
 
 # --- 3. Start server ---------------------------------------------------------
 mkdir -p "$DATA_DIR"
-say "Starting blazers serve on :$PORT (data: $DATA_DIR)"
-BLAZERS_DATA="$DATA_DIR" PORT="$PORT" JWT_SECRET="${JWT_SECRET:-dev}" \
+say "Starting backers serve on :$PORT (data: $DATA_DIR)"
+BACKERS_DATA="$DATA_DIR" PORT="$PORT" JWT_SECRET="${JWT_SECRET:-dev}" \
   "$BINARY" serve &
 SERVER_PID=$!
 

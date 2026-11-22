@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# install-local.sh — Build (if needed) and install blazers from this checkout.
+# install-local.sh — Build (if needed) and install backers from this checkout.
 #
 # Unlike install.sh (which downloads a prebuilt release), this script always
 # installs the binary produced by the local working tree, making it suitable
@@ -14,7 +14,7 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-BINARY="$REPO_ROOT/target/release/blazers"
+BINARY="$REPO_ROOT/target/release/backers"
 INSTALL_DIR="${INSTALL_DIR:-$HOME/.local/bin}"
 
 # --- Detect platform ---------------------------------------------------------
@@ -38,7 +38,7 @@ esac
 needs_build=0
 if [[ ! -x "$BINARY" ]]; then
     needs_build=1
-    echo "No release build found at target/release/blazers"
+    echo "No release build found at target/release/backers"
 elif [[ Cargo.toml -nt "$BINARY" || Cargo.lock -nt "$BINARY" ]] \
     || [[ -n "$(find crates -type f -name '*.rs' -newer "$BINARY" -print -quit 2>/dev/null)" ]]; then
     needs_build=1
@@ -51,7 +51,7 @@ if [[ "$needs_build" -eq 1 ]]; then
         exit 1
     fi
     echo "Building release binary (this may take a while)..."
-    cargo build --release -p blazers
+    cargo build --release -p backers
 fi
 
 if [[ ! -x "$BINARY" ]]; then
@@ -61,15 +61,15 @@ fi
 
 # --- Install (always overwrite: force fresh install) --------------------------
 mkdir -p "$INSTALL_DIR"
-install -m 0755 "$BINARY" "$INSTALL_DIR/blazers"
-echo "Installed blazers to $INSTALL_DIR/blazers"
+install -m 0755 "$BINARY" "$INSTALL_DIR/backers"
+echo "Installed backers to $INSTALL_DIR/backers"
 
-# A different `blazers` earlier on PATH would shadow this install. Warn
+# A different `backers` earlier on PATH would shadow this install. Warn
 # instead of silently installing a binary the user cannot reach.
-if command -v blazers >/dev/null 2>&1; then
-    resolved="$(command -v blazers)"
-    if [[ "$resolved" != "$INSTALL_DIR/blazers" ]]; then
-        echo "warning: \`blazers\` currently resolves to $resolved, not $INSTALL_DIR/blazers" >&2
+if command -v backers >/dev/null 2>&1; then
+    resolved="$(command -v backers)"
+    if [[ "$resolved" != "$INSTALL_DIR/backers" ]]; then
+        echo "warning: \`backers\` currently resolves to $resolved, not $INSTALL_DIR/backers" >&2
         echo "         reinstall with a directory earlier on PATH, e.g.:" >&2
         echo "           INSTALL_DIR=\$HOME/bin ./scripts/install-local.sh" >&2
     fi
@@ -77,9 +77,9 @@ else
     case ":$PATH:" in
         *":$INSTALL_DIR:"*) ;;
         *)
-            echo "warning: $INSTALL_DIR is not on PATH; add it or invoke $INSTALL_DIR/blazers directly" >&2
+            echo "warning: $INSTALL_DIR is not on PATH; add it or invoke $INSTALL_DIR/backers directly" >&2
             ;;
     esac
 fi
 
-"$INSTALL_DIR/blazers" --help >/dev/null
+"$INSTALL_DIR/backers" --help >/dev/null

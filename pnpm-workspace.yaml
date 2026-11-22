@@ -1,5 +1,5 @@
 packages:
   - 'packages/**'
-  - 'crates/blazers-sdk'
+  - 'crates/backers-sdk'
 
 minimumReleaseAge: 0
