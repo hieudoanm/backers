@@ -55,6 +55,8 @@ pub mod files;
 pub mod functions;
 pub use files::*;
 pub use functions::*;
+pub mod flags;
+pub use flags::*;
 pub mod webhooks;
 pub use webhooks::*;
 pub mod secrets_admin;

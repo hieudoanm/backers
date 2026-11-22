@@ -14,6 +14,7 @@ pub fn build_openapi_json() -> serde_json::Value {
         pubsub::paths(),
         cronjobs::paths(),
         functions::paths(),
+        flags::paths(),
     ] {
         paths.extend(group);
     }
@@ -83,6 +84,7 @@ mod buckets;
 mod cache;
 mod collections;
 mod cronjobs;
+mod flags;
 mod functions;
 mod logs;
 mod notifications;

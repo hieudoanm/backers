@@ -201,6 +201,17 @@ pub fn app(state: Arc<AppState>) -> Router {
             "/api/functions/{name}",
             delete(handlers::delete_function).post(handlers::invoke_function),
         )
+        .route(
+            "/api/flags",
+            get(handlers::list_flags).post(handlers::upsert_flag),
+        )
+        .route("/api/flags/evaluate", post(handlers::evaluate_flags))
+        .route(
+            "/api/flags/{name}",
+            get(handlers::get_flag)
+                .patch(handlers::patch_flag)
+                .delete(handlers::delete_flag),
+        )
         .route("/api/cronjobs/{id}/logs", get(handlers::list_cron_job_logs))
         .route("/api/backup", get(handlers::get_backup))
         .route("/api/backup/run", post(crate::backups::handle_run_backup))
