@@ -11,6 +11,7 @@ import {
   LuCpu,
   LuDatabase,
   LuFolderUp,
+  LuFlag,
   LuKeyRound,
   LuLayoutDashboard,
   LuLock,
@@ -247,6 +248,11 @@ const FEATURES: Feature[] = [
     title: 'Secrets vault & cache',
     body: 'AES-256-GCM encrypted key/value store for credentials, plus a Redis-style cache — strings, lists, hashes, atomic INCR/APPEND, TTL — persisted to SQLite.',
     icon: LuKeyRound,
+  },
+  {
+    title: 'Feature flags',
+    body: 'Runtime on/off switches with targeting rules — gate features per user, plan or context attribute, ship payloads and kill switches without a redeploy.',
+    icon: LuFlag,
   },
   {
     title: 'Admin dashboard',

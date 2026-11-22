@@ -198,6 +198,7 @@ mod collections;
 mod dbml;
 mod edge;
 mod features;
+mod flags;
 mod hooks;
 mod misc;
 mod storage;

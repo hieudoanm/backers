@@ -178,6 +178,15 @@ pub fn migrate_db(conn: &Connection) -> Result<()> {
             key   TEXT PRIMARY KEY,
             value TEXT NOT NULL DEFAULT ''
         );
+        CREATE TABLE IF NOT EXISTS _flags (
+            name        TEXT PRIMARY KEY,
+            enabled     INTEGER NOT NULL DEFAULT 0,
+            rules       TEXT NOT NULL DEFAULT '[]',
+            payload     TEXT NOT NULL DEFAULT 'null',
+            description TEXT NOT NULL DEFAULT '',
+            created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+            updated_at  TEXT NOT NULL DEFAULT (datetime('now'))
+        );
         CREATE TABLE IF NOT EXISTS _cronjob_logs (
             id          TEXT PRIMARY KEY,
             cronjob_id  TEXT NOT NULL,

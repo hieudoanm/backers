@@ -39,6 +39,7 @@ The machine-readable spec is always available from a running server:
 - [Cache](concepts/cache.md)
 - [Cron jobs](concepts/cron-jobs.md)
 - [Edge functions](concepts/functions.md)
+- [Feature flags](concepts/feature-flags.md)
 - [Secrets](concepts/secrets.md)
 - [Permissions (RBAC)](concepts/permissions.md)
 
@@ -58,6 +59,7 @@ The machine-readable spec is always available from a running server:
 - [Pub/Sub](api-reference/pubsub.md)
 - [Cron jobs](api-reference/cronjobs.md)
 - [Functions](api-reference/functions.md)
+- [Flags](api-reference/flags.md)
 - [Secrets](api-reference/secrets.md)
 - [Permissions](api-reference/permissions.md)
 - [Admin & ops](api-reference/admin.md)

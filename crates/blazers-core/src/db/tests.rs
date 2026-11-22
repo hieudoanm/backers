@@ -1,6 +1,7 @@
 mod cache;
 mod cron;
 mod files;
+mod flags;
 mod logs;
 mod notifications;
 mod pubsub;
