@@ -583,8 +583,8 @@ const Home: NextPage = () => (
       <CTA
         title="Give your next side project a real backend."
         description="Self-host it, embed it, or point your AI agent at it over MCP."
-        primary={{ label: 'Star on GitHub', href: GITHUB, external: true }}
-        secondary={{ label: 'Read the docs', href: '/docs/' }}
+        primary={{ label: 'Download', href: '/downloads/' }}
+        secondary={{ label: 'View Docs', href: '/docs/' }}
       />
     </main>
   </>
