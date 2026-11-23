@@ -6,19 +6,19 @@ import Features, { type Feature } from '@/components/molecules/Features';
 import Hero from '@/components/molecules/Hero';
 import CTA from '@/components/molecules/CTA';
 import {
-  LuBookOpen,
-  LuCheck,
-  LuCpu,
-  LuDatabase,
-  LuFolderUp,
-  LuFlag,
-  LuKeyRound,
-  LuLayoutDashboard,
-  LuLock,
-  LuWebhook,
-  LuX,
-  LuZap,
-} from 'react-icons/lu';
+  PiBookOpen,
+  PiCheck,
+  PiCpu,
+  PiDatabase,
+  PiFolderSimplePlus,
+  PiFlag,
+  PiKey,
+  PiSquaresFour,
+  PiLock,
+  PiPlugsConnected,
+  PiX,
+  PiLightning,
+} from 'react-icons/pi';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -169,9 +169,9 @@ const COMPARE_GROUPS: CompareGroup[] = [
 function support(value: Support) {
   if (value === 'na') return <span className="text-gray-300">-</span>;
   return value ? (
-    <LuCheck aria-label="Supported" className="text-success size-4" />
+    <PiCheck aria-label="Supported" className="text-success size-4" />
   ) : (
-    <LuX aria-label="Not supported" className="text-error size-4" />
+    <PiX aria-label="Not supported" className="text-error size-4" />
   );
 }
 
@@ -222,52 +222,52 @@ const FEATURES: Feature[] = [
   {
     title: 'Auth & permissions',
     body: 'Register, login, JWT bearer tokens, bcrypt passwords, password reset and email verification — plus per-collection record rules with @request.auth expressions.',
-    icon: LuLock,
+    icon: PiLock,
   },
   {
     title: 'Collections & records',
     body: 'Schema-less collections stored as dynamic SQLite tables. CRUD with paging, search, filter expressions, sorting, relation expand and JSON-schema validation.',
-    icon: LuDatabase,
+    icon: PiDatabase,
   },
   {
     title: 'File buckets',
     body: 'Public and private buckets, uploads, downloads, on-the-fly thumbnails and time-limited file tokens for protected files.',
-    icon: LuFolderUp,
+    icon: PiFolderSimplePlus,
   },
   {
     title: 'Realtime',
     body: 'WebSocket hub plus Server-Sent Events streams for notifications, logs and pub/sub topics — subscribe from any browser or client.',
-    icon: LuZap,
+    icon: PiLightning,
   },
   {
     title: 'Webhooks & cron',
     body: 'HMAC-signed webhook delivery with logs, and scheduled HTTP jobs managed entirely through the API — no code required.',
-    icon: LuWebhook,
+    icon: PiPlugsConnected,
   },
   {
     title: 'Secrets vault & cache',
     body: 'AES-256-GCM encrypted key/value store for credentials, plus a Redis-style cache — strings, lists, hashes, atomic INCR/APPEND, TTL — persisted to SQLite.',
-    icon: LuKeyRound,
+    icon: PiKey,
   },
   {
     title: 'Feature flags',
     body: 'Runtime on/off switches with targeting rules — gate features per user, plan or context attribute, ship payloads and kill switches without a redeploy.',
-    icon: LuFlag,
+    icon: PiFlag,
   },
   {
     title: 'Admin dashboard',
     body: 'An HTMX admin UI embedded in the binary at / — manage collections, records, files, webhooks, secrets and cron jobs from the browser. No build step.',
-    icon: LuLayoutDashboard,
+    icon: PiSquaresFour,
   },
   {
     title: 'MCP server',
     body: 'backers mcp serve exposes collections and records as Model Context Protocol tools — let an AI agent read and write your backend over stdio.',
-    icon: LuCpu,
+    icon: PiCpu,
   },
   {
     title: 'OpenAPI & SDK-ready',
     body: 'Swagger UI at /api/docs, a runtime-generated OpenAPI spec, JSON import/export snapshots and a backup endpoint.',
-    icon: LuBookOpen,
+    icon: PiBookOpen,
   },
 ];
 
