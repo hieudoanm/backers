@@ -11,7 +11,7 @@ Prebuilt binaries for Linux (x86_64), macOS (Apple Silicon), and Windows
 
 ```sh
 # macOS / Linux
-curl -L -o backers https://github.com/hieudoanm/backers/releases/latest/download/backers-<target>
+curl -L -o backers https://github.com/hieudoanm/backers/releases/latest/download/cli-backers-<target>
 chmod +x backers
 ./backers serve
 ```
