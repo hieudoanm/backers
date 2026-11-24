@@ -17,3 +17,4 @@ browsers/
 .backers-data/
 *.db
 .tracers-cache/
+.tracers/cache/
