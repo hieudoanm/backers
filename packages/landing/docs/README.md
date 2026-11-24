@@ -88,3 +88,10 @@ The machine-readable spec is always available from a running server:
 - [AWS](deployment/iaas-aws.md)
 - [Azure](deployment/iaas-azure.md)
 - [GCP](deployment/iaas-gcp.md)
+
+## Installation guides
+
+- [CLI on macOS (Apple Silicon)](guides/how-to-install-cli-macos-silicon.md)
+- [CLI on macOS (Intel)](guides/how-to-install-cli-macos-intel.md)
+- [CLI on Linux](guides/how-to-install-cli-linux.md)
+- [CLI on Windows](guides/how-to-install-cli-windows.md)
