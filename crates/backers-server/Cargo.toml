@@ -28,7 +28,7 @@ infer = "=0.22.0"
 jsonwebtoken = { version = "=12.0.0", features = ["rust_crypto"] }
 bcrypt = "=0.19.3"
 hmac = "=0.13.0"
-sha2 = "=0.11.1"
+sha2 = "=0.11.2"
 hex = "=0.4.3"
 aes-gcm = "=0.11.1"
 rand = "=0.10.4"
